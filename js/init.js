@@ -872,12 +872,9 @@ function getTwitterFeeds(){
 
 					$("shule_left_left_container").appendChild(shule);
 
-
-
 				}
 
-
-
+				//we need auto feed load ----notifications
 
 		}
 	}
