@@ -1,2 +1,2 @@
-# Stream
-Live Event Streaming
+# TechShule
+Tech Knowledge Sharing Platform Devoted to Inspiring Innovation.
