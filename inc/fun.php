@@ -9,7 +9,7 @@ if(isset($_GET['send_msg'])){
 		}
 		else{
 			if(!empty($_POST['msg']) && $_POST['msg']!="Write Message Here..." && preg_match("/^[0-9a-zA-Z]+/", $_POST['msg'])){
-				$to="love@ourforgottenchildren.org";
+				$to="stream@plus256.com";
 				$frm=cleanInput($_POST['frm']);
 				$sbj=cleanInput($_POST['sbj']);
 				$msg=cleanInput($_POST['msg']);
@@ -45,7 +45,7 @@ function cleanInput($data){
 }
 
 if(isset($_GET['fb_page_feed'])){
-  $fb_page_id = "1654570574761047";
+  $fb_page_id = "335422937918";
   $access_token = "482219788583361|hKl9uoyyU6FwifKMLd-mWLsGR1Y";
   $fields = "id,message,full_picture,link,name,description,type,icon,created_time,from,object_id";//use full_picture instead of picture
   $limit = 5;

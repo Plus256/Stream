@@ -29,7 +29,7 @@ echo $twitter->buildOauth($url, $requestMethod)
 /** Perform a GET request and echo the response **/
 /** Note: Set the GET field BEFORE calling buildOauth(); **/
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
-$getfield = '?q=%23africankid';
+$getfield = '?q=%23Ferguson&count=8';
 $requestMethod = 'GET';
 $twitter = new TwitterAPIExchange($settings);
 echo $twitter->setGetfield($getfield)
