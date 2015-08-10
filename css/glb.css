@@ -1385,8 +1385,10 @@ a#sponsor_link{
 }
 
 .shule{
-	clear:both;
+	width:calc(100% / 4 - 5px);/*off-setting margin length*/
+	float:left;
 	margin-bottom:10px;
+	margin-right:5px;
 	background:#FFF;
 }
 

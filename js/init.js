@@ -387,7 +387,7 @@ function getTwitterFeeds(){
 
 					shule.appendChild(shule_spacer);
 
-					$("shule_left_left_container").appendChild(shule);
+					$("shule_left_container").appendChild(shule);
 
 
 
@@ -500,7 +500,7 @@ function getFacebookPageFeeds(){
 					}
 					shule.appendChild(shule_spacer);
 
-					$("shule_left_right_container").appendChild(shule);
+					$("shule_left_container").appendChild(shule);
 				}
 		}
 	}
