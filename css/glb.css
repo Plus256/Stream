@@ -18,7 +18,7 @@ div{
 
 a {
 	text-decoration:none;
-	color:#FC0;
+	color:#FBAE17;
 }
 
 a:hover {
@@ -31,7 +31,7 @@ a:hover {
 
 #banner {
 	padding:0 10px;
-	background:#090;
+	background:#FBAE17;
 	height:5em;
 	overflow-y:visible;
 }
@@ -151,7 +151,7 @@ a:hover {
 }
 
 #mobile_menu ul li a:hover{
-	background:#090;
+	background:#FBAE17;
 	color:#FFF;
 }
 
@@ -237,7 +237,7 @@ a:hover {
 }
 
 #dialog_box{
-	color:#09F;
+	color:#FBAE17;
 	display:none;
 	position:fixed;
 	z-index:100;
@@ -264,7 +264,7 @@ a:hover {
 	/*not floating a div without a width declaration causes it to take 100% of parent*/
 	/*floating a div without a width declaration causes it to be as wide as to only occypy its content*/
 	/*floating a div with a width declaration causes it to take that % of parent*/
-	background:#FC0;
+	background:#FBAE17;
 	font-size:80%;
 	padding:10px;
 	color:#036;
@@ -372,7 +372,7 @@ div#msg_area:focus{
 }
 
 #footer{
-	background:#555555;
+	background:#766968;
 	color:#A1A1A1;
 }
 
@@ -508,7 +508,7 @@ textarea {
 
 textarea:focus, input:focus{
     outline:0;
-		border:1px solid #09F;
+		border:1px solid #FBAE17;
 }
 
 textarea::-webkit-input-placeholder{
@@ -693,7 +693,7 @@ Give the second/middle element an auto margin so that it centres itself inside t
 }
 
 #caption_header{
-	color:#FC0;
+	color:#FBAE17;
 }
 
 #caption_body{
@@ -702,7 +702,7 @@ Give the second/middle element an auto margin so that it centres itself inside t
 }
 
 #caption_footer a{
-	color:#FC0;
+	color:#FBAE17;
 }
 
 #reviews_title{
@@ -804,7 +804,7 @@ Give the second/middle element an auto margin so that it centres itself inside t
 }
 
 #hashtag{
-	color:#FC0;
+	color:#FBAE17;
 }
 
 #reviews_body{
@@ -853,7 +853,7 @@ Give the second/middle element an auto margin so that it centres itself inside t
 }
 
 .partner_more{
-	color:#FC0;
+	color:#FBAE17;
 }
 
 #gallery_body{
@@ -989,7 +989,7 @@ input[type="button"].apply_submit_but:hover{
 }
 
 #about{
-	background:#09F;
+	background:#FBAE17;
 	color:#FFF;
 	padding:5em 0;
 }
@@ -1130,7 +1130,7 @@ input[type="button"].apply_submit_but:hover{
 }
 
 #contact_email{
-	color:#FC0;
+	color:#FBAE17;
 	padding:1em 0;
 	font-size:120%;
 }
@@ -1199,7 +1199,7 @@ input[type="text"]{
 }
 
 input[type="text"]:focus{
-	border:1px solid #09F;
+	border:1px solid #FBAE17;
 }
 
 .apply_form_inputs{
@@ -1227,7 +1227,7 @@ a.apply_form_timeline_step, a.details_links_cat{
 	padding:10px 5em;
 	text-decoration:none;
 	display:inline-block;
-	color:#09F;
+	color:#FBAE17;
 }
 
 .radio_label{
@@ -1244,7 +1244,7 @@ a.apply_form_timeline_step, a.details_links_cat{
 }
 
 .term_note a{
-	color:#09F;
+	color:#FBAE17;
 }
 
 .form_feedback{
@@ -1286,7 +1286,7 @@ a.cancel_but:hover{
 
 #medical_criminal{
 	font-size:80%;
-	color:#09F;
+	color:#FBAE17;
 	padding-bottom:10px;
 	text-align:center;
 }
@@ -1376,7 +1376,7 @@ table#fees_table td:first-child{
 }
 
 a#sponsor_link{
-	color:#090;
+	color:#FBAE17;
 }
 
 #post_container{
@@ -1441,7 +1441,7 @@ float:left;
 
 .auth_screen_name{
 font-size:80%;
-color:#09F;
+color:#FBAE17;
 padding-left:10px;
 overflow:hidden;
 }
@@ -1470,7 +1470,7 @@ color:#A1A1A1;
 
 .shule_category{
 	font-style:italic;
-	color:#090;
+	color:#FBAE17;
 }
 
 .shule_category:hover{
@@ -1505,7 +1505,7 @@ color:#A1A1A1;
 }
 
 #shule_container_category{
-	color:#09F;
+	color:#FBAE17;
 	font-size:80%;
 }
 
@@ -1615,7 +1615,7 @@ color:#A1A1A1;
 	padding:0 5px;
 	font-weight:bold;
 	background:#E1E1E1;
-	color:#09F;
+	color:#FBAE17;
 }
 
 #news_l{
@@ -1721,7 +1721,7 @@ color:#A1A1A1;
 }
 
 .exlink_ad a:hover{
-	border-bottom:1px solid #09F;
+	border-bottom:1px solid #FBAE17;
 }
 
 .pic_ad{

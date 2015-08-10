@@ -9,11 +9,11 @@ require_once("inc/fun.php");
 <meta name="viewport" content="width=device-width">
 <meta name="viewport" content="initial-scale=1.0">
 <meta name="description" content="<?php echo $full_name; ?>">
-<meta name="keywords" content="African Child, Voice of Africa, Childcare, Uganda, Africa">
+<meta name="keywords" content="<?php echo $meta_keywords; ?>">
 <link rel="shortcut icon" href="gra/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="css/glb.css" />
 <link rel="stylesheet" type="text/css" href="css/mob.css" />
-<title><?php echo $full_name; ?></title>
+<title><?php echo $full_name." | ".$slogan; ?></title>
 <!--Plus256 Network, Ltd-->
 <!--www.plus256.com-->
 <script type="text/javascript" src="js/init.js"></script>

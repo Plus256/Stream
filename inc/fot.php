@@ -1,7 +1,7 @@
 <div id="footer">
 	<div class="wrapper">
         <div id="fot_soc">
-            <a href="https://www.facebook.com/africankidvoice" target="_NEW"><img src="gra/facebook.png" /></a>
+            <a href="https://www.facebook.com/stream" target="_NEW"><img src="gra/facebook.png" /></a>
             <a href="#" target="_NEW"><img src="gra/twitter.png" /></a>
             <a href="#" target="_NEW"><img src="gra/instagram.png" /></a>
             <div class="spacer"></div>
