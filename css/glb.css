@@ -220,8 +220,8 @@ a:hover {
 	font-size:80%;
 	text-align:center;
 	padding:2em 0;
-	background:rgb(0, 153, 0);
-	background:rgba(0, 153, 0, 0.75);
+	background:rgb(251, 174, 23);
+	background:rgba(251, 174, 23, 0.75);
 	color:#FFF;
 	margin-bottom:10px;
 }
