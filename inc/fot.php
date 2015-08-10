@@ -7,7 +7,7 @@
             <div class="spacer"></div>
         </div>
     	<div id="fot_links">
-            <a href="./#support" id="ad_fot_link">Support</a>
+            <a href="./#start" id="ad_fot_link">Start</a>
             <a href="./#contact" id="contr_fot_link">Contact</a>
 						<a href="./#about" id="contr_fot_link">About</a>
             <div class="spacer"></div>

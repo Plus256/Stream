@@ -5,7 +5,7 @@ var buffer=new Buffer();
 buffer.render=function(cont){
 	buffer.setAttribute("id", "buffer");
 	buffer.style.display="block";//remains with none attribute, so we either set this display or remove it on done()
-	var statements=new Array("Fetching Content", "In Just a Moment", "African Kid Voice");
+	var statements=new Array("Fetching Content", "In Just a Moment", "Stream Live");
 	var thisStatement=0;
 	buffer.innerHTML=statements[thisStatement];
 	setInterval(function (){
