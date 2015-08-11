@@ -15,7 +15,7 @@ buffer.render=function(cont){
 		}
 		buffer.innerHTML=statements[thisStatement];
 	}, 5000);
-	$(cont).appendChild(buffer);
+	document.getElementById(cont).appendChild(buffer);
 }
 buffer.done=function(){
 	buffer.style.display="none";
@@ -49,242 +49,6 @@ Innovation is a new idea, device or process
 function initAll(){
 	getTwitterFeeds();
 	getFacebookPageFeeds();
-}
-
-function fetchShule(){
-	buffer.render("shule_left_container");
-	var xhr;
-	var url="fun.php?fetch_shule";
-	if(window.XMLHttpRequest){
-		xhr=new XMLHttpRequest();
-	}
-	else{
-		xhr=new ActiveXObject("Microsoft:XMLHTTP");
-	}
-	xhr.open("GET", url);
-	xhr.onreadystatechange=function(){
-		if(xhr.readyState==4 && xhr.status==200){
-			buffer.done();
-			var data=xhr.responseText;
-			data=JSON.parse(data);
-			var i=0; var c=0;
-			while(i<data.length){
-				if(c==(data.length)){
-					break;
-				}
-				for(var j=0; j<2; j++){
-					n_a=data[c].tot_r;
-					l_id=data[c].id;
-					var shule=_("div");
-					shule.setAttribute("class", "shule");
-
-					var shule_spacer=_("div");
-					shule_spacer.setAttribute("class", "spacer");
-
-					var shule_cover=_("div");
-					shule_cover.setAttribute("class", "shule_cover");
-					var img=_("img");
-					img.src="img/"+data[c].cover;
-					shule_cover.appendChild(img);
-					var shule_cover_link=_("a");
-					shule_cover_link.href="shule.php?id="+data[c].id+"";
-					shule_cover_link.appendChild(shule_cover);
-					shule.appendChild(shule_cover_link);
-
-					var shule_details=_("div");
-					shule_details.setAttribute("class", "shule_details");
-
-					var shule_title=_("div");
-					shule_title.setAttribute("class", "shule_title");
-					shule_title.innerHTML=data[c].title;
-					var shule_link=_("a");
-					shule_link.href="shule.php?id="+data[c].id+"";
-					shule_link.appendChild(shule_title);
-					shule_details.appendChild(shule_link);
-
-					var shule_pub_det=_("div");
-					shule_pub_det.setAttribute("class", "shule_pub_det");
-
-					var shule_author=_("div");
-					shule_author.setAttribute("class", "shule_author");
-					shule_author.innerHTML="By "+data[c].author;
-
-					var shule_published=_("div");
-					shule_published.setAttribute("class", "shule_published");
-					shule_published.innerHTML=data[c].published;
-
-					var shule_category=_("div");
-					shule_category.setAttribute("class", "shule_category");
-					shule_category.innerHTML=data[c].category;
-					var shule_category_link=_("a");
-					shule_category_link.href="./?cat="+data[c].category+"";
-					shule_category_link.appendChild(shule_category);
-
-					shule_pub_det.appendChild(shule_author);
-					shule_pub_det.appendChild(shule_published);
-					shule_pub_det.appendChild(shule_category_link);
-					shule_details.appendChild(shule_pub_det);
-
-					var shule_body=_("div");
-					shule_body.setAttribute("class", "shule_body");
-					shule_body.innerHTML=data[c].intro;
-					shule_details.appendChild(shule_body);
-
-					shule.appendChild(shule_details);
-					shule.appendChild(shule_spacer);
-
-					switch(j){
-						case 0:
-						$("shule_left_left_container").appendChild(shule);
-						break;
-						case 1:
-						$("shule_left_right_container").appendChild(shule);
-						break;
-					}
-
-					c++;
-					if(c==(data.length)){
-						break;
-					}
-				}
-				i++;
-			}
-			var n_b=document.getElementsByClassName('shule');
-			if(n_b.length<(n_a-1)){
-				$("load_more_but").style.display="block";
-				$("load_more_but").addEventListener("click", loadMore, false);
-			}
-		}
-	}
-	xhr.send(null);
-}
-
-
-function $(id){
-	return document.getElementById(id);
-}
-
-function _(tag_name){
-	return document.createElement(tag_name);
-}
-
-function moreShule(id){
-	buffer.render("more_shule_left");
-	var xhr;
-	var url="fun.php?more_shule&shule_id="+id+"";
-	if(window.XMLHttpRequest){
-		xhr=new XMLHttpRequest();
-	}
-	else{
-		xhr=new ActiveXObject("Microsoft:XMLHTTP");
-	}
-	xhr.open("GET", url);
-	xhr.onreadystatechange=function(){
-		if(xhr.readyState==4 && xhr.status==200){
-			$("dashboard").style.display="none";//remove placeholder element
-			buffer.done();
-			var data=xhr.responseText;
-			data=JSON.parse(data);
-			var shule=_("div");
-			shule.setAttribute("class", "shule");
-
-			var shule_title=_("div");
-			shule_title.setAttribute("class", "shule_title");
-			shule_title.innerHTML=data.title;
-			shule.appendChild(shule_title);
-
-			var shule_pub_det=_("div");
-			shule_pub_det.setAttribute("class", "shule_pub_det");
-
-			var shule_author=_("div");
-			shule_author.setAttribute("class", "shule_author");
-			shule_author.innerHTML="By "+data.author;
-
-			var shule_published=_("div");
-			shule_published.setAttribute("class", "shule_published");
-			shule_published.innerHTML=data.published;
-
-			var shule_category=_("div");
-			shule_category.setAttribute("class", "shule_category");
-			shule_category.innerHTML=data.category;
-			var shule_category_link=_("a");
-			shule_category_link.href="./?cat="+data.category+"";
-			shule_category_link.appendChild(shule_category);
-
-			shule_pub_det.appendChild(shule_author);
-			shule_pub_det.appendChild(shule_published);
-			shule_pub_det.appendChild(shule_category_link);
-			shule.appendChild(shule_pub_det);
-
-			var fb_share=_("img");
-			fb_share.src="./gra/facebook.png";
-
-			//var twt_share=_("a");
-			//twt_share.href="https://twitter.com/share";
-			//twt_share.setAttribute("target", "_blank");
-			var twt_share=_("img");
-			twt_share.src="./gra/twitter.png";
-			twt_share.addEventListener("click",function(){
-				window.open("https://twitter.com/share?text="+data.title+"&url="+escape(window.location.href), "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600");
-			},false);
-
-			var gp_share=_("img");
-			gp_share.src="./gra/google.png";
-			gp_share.addEventListener("click",function(){
-				window.open("https://plus.google.com/share?url="+escape(window.location.href), "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600");
-			},false);
-			//var fb_share=_("div");
-			//fb_share.setAttribute("class", "fb_share");
-			//.innerHTML="Share on Facebook";
-			fb_share.addEventListener("click", function fbShareDial(){
-				/*FB.ui({
-				  method: 'share',
-				  href: ''+window.location.href+'',
-				}, function(response){});
-				FB.ui({
-				  method: 'share_open_graph',
-				  action_type: 'og.likes',
-				  action_properties: JSON.stringify({
-				      object:''+window.location.href+'',
-				  })
-				}, function(response){});*/
-				window.open("https://www.facebook.com/sharer/sharer.php?s=100&u="+escape(window.location.href)+"&t="+data.title, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-				//window.open("https://www.facebook.com/sharer/sharer.php?s=100&p[title]="+document.title+"&p[summary]=EXAMPLE&p[url]="+escape(window.location.href)+"&p[images][0]=EXAMPLE&u="+escape(window.location.href)+"&t="+document.title+"");
-			}, false);
-
-			var social_spacer=_("div");
-			social_spacer.setAttribute("class", "spacer");
-
-			var views=_("div");
-			views.setAttribute("class", "views");
-			views.innerHTML=data.views+" Views";
-
-			var social=_("div");
-			social.setAttribute("class", "social");
-
-			social.appendChild(fb_share);
-			social.appendChild(twt_share);
-			social.appendChild(gp_share);
-			social.appendChild(views);
-			social.appendChild(social_spacer);
-			shule.appendChild(social);
-
-			var shule_cover=_("div");
-			shule_cover.setAttribute("class", "dash_cover");
-			var img=_("img");
-			img.src="img/"+data.cover;
-			shule_cover.appendChild(img);
-			shule.appendChild(shule_cover);
-
-			var shule_body=_("div");
-			shule_body.setAttribute("class", "shule_body");
-			shule_body.innerHTML=data.intro;
-			shule.appendChild(shule_body);
-
-			$("more_shule_left_this").appendChild(shule);
-		}
-	}
-	xhr.send(null);
 }
 
 function getTwitterFeeds(){
@@ -351,7 +115,7 @@ function getTwitterFeeds(){
 					auth_screen_name.setAttribute("class", "auth_screen_name");
 
 					auth_name.appendChild(auth_name_name);
-					auth_name.appendChild(auth_screen_name);
+					//auth_name.appendChild(auth_screen_name);
 					auth_name.appendChild(auth_name_spacer);
 
 					var shule_published=_("div");
@@ -387,7 +151,7 @@ function getTwitterFeeds(){
 
 					shule.appendChild(shule_spacer);
 
-					$("shule_left_container").appendChild(shule);
+					document.getElementById("shule_left_container").appendChild(shule);
 
 
 
@@ -500,7 +264,7 @@ function getFacebookPageFeeds(){
 					}
 					shule.appendChild(shule_spacer);
 
-					$("shule_left_container").appendChild(shule);
+					document.getElementById("shule_left_container").appendChild(shule);
 				}
 		}
 	}
@@ -509,4 +273,8 @@ function getFacebookPageFeeds(){
 
 function Buffer(){
 	return _("div");
+}
+
+function _(tag_name){
+	return document.createElement(tag_name);
 }

@@ -16,6 +16,10 @@ require_once("inc/fun.php");
 <title><?php echo $full_name." | ".$slogan; ?></title>
 <!--Plus256 Network, Ltd-->
 <!--www.plus256.com-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
+<!--<script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>-->
+<!--<script type="text/javascript" src="js/masonry.pkgd.min.js"></script>-->
 <script type="text/javascript" src="js/init.js"></script>
 <script type="text/javascript" src="js/fun.js"></script>
 <script src="//use.typekit.net/nww6oyv.js"></script>

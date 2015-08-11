@@ -1532,8 +1532,8 @@ color:#A1A1A1;
 
 #shule_left_container{
 	width:70%;
-	float:left;
-	overflow:hidden;
+	/*float:left;
+	overflow:hidden;*/
 	position:relative;
 }
 

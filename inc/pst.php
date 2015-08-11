@@ -7,6 +7,14 @@
               <div id="shule_left_right_container">
               </div>
               <div id="load_more_but">Load More</div>-->
+              <script>
+              $(document).ready(function(){
+                $('#shule_left_container').masonry({
+                  itemSelector:'.shule',
+                  isAnimated: true,
+                });
+              });
+              </script>
           </div>
           <?php require_once("inc/ads.php"); ?>
         <div class="spacer"></div>
