@@ -223,6 +223,8 @@ a:hover {
 	background:rgb(251, 174, 23);
 	background:rgba(251, 174, 23, 0.75);
 	color:#FFF;
+	float:left;
+	width:100%;
 	margin-bottom:10px;
 }
 
@@ -264,12 +266,12 @@ a:hover {
 	/*not floating a div without a width declaration causes it to take 100% of parent*/
 	/*floating a div without a width declaration causes it to be as wide as to only occypy its content*/
 	/*floating a div with a width declaration causes it to take that % of parent*/
-	background:#FBAE17;
+	background:#CCC;
 	font-size:80%;
 	padding:10px;
 	color:#036;
 	cursor:pointer;
-	border:1px solid #F90;
+	border:1px solid #BBB;
 	text-align:center;
 }
 
@@ -312,6 +314,7 @@ div#msg_area {
 	/*a word (charcters without a space) stays on a single line by default - it does not wrap.
 	so having a very long one causes it to get off the text area*/
 	background:#FAFAFA;
+	color:#555;
 	transition:all 0.5s linear 0.1s;
 	-moz-transition:all 0.5s linear 0.1s;
 	-webkit-transition:all 0.5s linear 0.1s;
@@ -447,7 +450,7 @@ input[type="text"].msg_dialog_text_input{
 	background:#FAFAFA;
 	border:none;
 	height:2.5em;
-	color:#000;
+	color:#555;
 	padding-left:0;
 	padding-right:0;
 	line-height:2.5em;
@@ -508,7 +511,6 @@ textarea {
 
 textarea:focus, input:focus{
     outline:0;
-		border:1px solid #FBAE17;
 }
 
 textarea::-webkit-input-placeholder{
@@ -539,12 +541,6 @@ textarea:-moz-placeholder{
 #sosh {
 	float:right;
 	width:64%;
-}
-
-#main{
-	background:rgba(255, 255, 255, 0.5);
-	float:left;
-	padding:10px;
 }
 
 #carousel{
@@ -1198,10 +1194,6 @@ input[type="text"]{
 	-webkit-border-radius:0;
 }
 
-input[type="text"]:focus{
-	border:1px solid #FBAE17;
-}
-
 .apply_form_inputs{
 	margin-bottom:1em;
 	margin-right:auto;
@@ -1379,12 +1371,12 @@ a#sponsor_link{
 	color:#FBAE17;
 }
 
-#post_container{
+#main_content{
 	padding:10px 10px 0 10px;
 	background:#EAEAEA;
 }
 
-.shule{
+.feed{
 	width:calc(100% / 4 - 5px);/*off-setting margin length*/
 	float:left;
 	margin-bottom:10px;
@@ -1392,39 +1384,39 @@ a#sponsor_link{
 	background:#FFF;
 }
 
-.shule a{
+.feed a{
 	color:#000;
 	text-decoration:none;
 }
 
-.shule .read_more{
+.feed .read_more{
 	color:#F00;
 	font-size:80%;
 }
 
-.shule .read_more:hover{
+.feed .read_more:hover{
 	color:#000;
 }
 
-.shule_title, .shule_body, .shule_pub_det{
+.feed_title, .feed_body, .feed_pub_det{
 	padding:5px;
 	text-align:left;
 }
 
-.shule_title{
+.feed_title{
 	font-size:150%;
 }
 
-.shule_title:hover{
+.feed_title:hover{
 	background:#EEE;
 	color:#F00;
 }
 
-.shule_pub_det{
+.feed_pub_det{
 	font-size:80%;
 }
 
-.shule_author{
+.feed_author{
 	background:#FAFAFA;
 	border-bottom:1px solid #EEE;
 }
@@ -1448,52 +1440,45 @@ padding-left:10px;
 overflow:hidden;
 }
 
-.shule_published{
+.feed_published{
 font-size:80%;
 color:#A1A1A1;
 
 }
 
-.shule_body{
+.feed_body{
 	color:#555;
 }
 
-.shule_body a{
+.feed_body a{
 	color:#F00;
 }
 
-.shule_body a:hover{
+.feed_body a:hover{
 	color:inherit;
 }
 
-.shule_body img{
+.feed_body img{
 	width:100%;
 }
 
-.shule_category{
+.feed_category{
 	font-style:italic;
 	color:#FBAE17;
 }
 
-.shule_category:hover{
+.feed_category:hover{
 	background:#F1F1F1;
 }
 
-.shule_cover img{
+.feed_cover img{
 	width:100%;
 	height:auto;
 	display:block;
 }
 
-#shule_container{
-	background:rgb(255, 255, 255);
-	background:rgba(255, 255, 255, 0.9);
-	position:absolute;
-	z-index:10;
-	top:10px;
-	width:100%;
-	max-height:100%;
-	padding:10px;
+#feed_container{
+	width:70%;
 }
 
 .dash_cover img{
@@ -1502,48 +1487,41 @@ color:#A1A1A1;
 	display:block;
 }
 
-#shule_tit_cat a{
+#feed_tit_cat a{
 	text-decoration:none;
 }
 
-#shule_container_category{
+#feed_container_category{
 	color:#FBAE17;
 	font-size:80%;
 }
 
-#shule_container_title{
+#feed_container_title{
 	color:#000;
 	padding-right:10px;
 }
 
-#shule_container_body{
+#feed_container_body{
 	font-size:80%;
 	color:#555555;
 	padding-right:10px;
 }
 
-#shule_container .read_more{
+#feed_container .read_more{
 	text-decoration:none;
 }
 
-#shule_container .read_more:hover{
+#feed_container .read_more:hover{
 	color:inherit;
 }
 
-#shule_left_container{
-	width:70%;
-	/*float:left;
-	overflow:hidden;*/
-	position:relative;
-}
-
-#shule_left_left_container{
+#feed_left_left_container{
 	width:49%;
 	float:left;
 	overflow:hidden;
 }
 
-#shule_left_right_container{
+#feed_left_right_container{
 	width:49%;
 	float:right;
 	overflow:hidden;
@@ -1564,20 +1542,20 @@ color:#A1A1A1;
 	background:#F1F1F1;
 }
 
-#shule_right_container{
+#ads{
 	overflow:hidden;
 	padding-left:10px;
 }
 
-#more_shule_content{
+#more_feed_content{
 	background:#F5F5F5;
 }
 
-#more_shule_content div.wrapper{
+#more_feed_content div.wrapper{
 	padding-top:10px;
 }
 
-#more_shule_left{
+#more_feed_left{
 	width:70%;
 	float:left;
 	overflow:hidden;

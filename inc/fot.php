@@ -7,9 +7,9 @@
             <div class="spacer"></div>
         </div>
     	<div id="fot_links">
-            <a href="./#start" id="ad_fot_link">Start</a>
-            <a href="./#contact" id="contr_fot_link">Contact</a>
-						<a href="./#about" id="contr_fot_link">About</a>
+            <a href="./#start">Start</a>
+            <a href="./#contact" class="contact_button">Contact</a>
+						<a href="./#about">About</a>
             <div class="spacer"></div>
         </div>
         <div id="copyright">Powered by <?php echo " <a href='http://plus256.com' target='_NEW' id='sponsor_link'>".$sponsor."</a>"; ?></div>

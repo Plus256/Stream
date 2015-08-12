@@ -9,24 +9,24 @@
 }
 
 @media only screen and (min-width:641px) and (max-width:980px){
-	#shule_left_container, #more_shule_left, #shule_right_container{
+	#feed_left_container, #more_feed_left, #feed_right_container{
 		float:none;
 		width:auto;
 	}
 
-	#shule_right_container{
+	#feed_right_container{
 		padding-left:0;
 	}
 }
 
 /* tablets portrait*/
 @media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation:portrait){
-	#shule_left_container, #more_shule_left, #shule_right_container{
+	#feed_left_container, #more_feed_left, #feed_right_container{
 		float:none;
 		width:auto;
 	}
 
-	#shule_right_container{
+	#feed_right_container{
 		padding-left:0;
 	}
 }
@@ -173,30 +173,30 @@
 		width:50%;
 	}
 
-	#shule_tit_cat{
+	#feed_tit_cat{
 		float:none;
 		width:auto;
 		margin-right:20px;
 	}
 
-	#shule_container_title{
+	#feed_container_title{
 		font-size:80%;
 	}
 
-	#shule_container_body{
+	#feed_container_body{
 		display:none;
 	}
 
-	#shule_left_container, #more_shule_left, #shule_left_left_container, #shule_left_right_container, #shule_right_container{
+	#feed_left_container, #more_feed_left, #feed_left_left_container, #feed_left_right_container, #feed_right_container{
 		float:none;
 		width:auto;
 	}
 
-	#shule_right_container{
+	#feed_right_container{
 		padding-left:0;
 	}
 
-	.shule{
+	.feed{
 		width:auto;/*off-setting margin length*/
 		float:none;
 	}

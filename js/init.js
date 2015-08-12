@@ -1,5 +1,7 @@
-window.onload=initAll;
-var n_a; var l_id;
+$(document).ready(function(){
+	getTwitterFeeds();
+	getFacebookPageFeeds();
+});
 
 var buffer=new Buffer();
 buffer.render=function(cont){
@@ -19,40 +21,10 @@ buffer.render=function(cont){
 }
 buffer.done=function(){
 	buffer.style.display="none";
-	//this.parentNode.removeChild(this);
-}
-
-/*
-TechShule - a Tech Knowledge Sharing Platform.
-Inspiring Innovation (in Africa) [through tech knowledge sharing]
-
-Knowledge is a familiarity, awareness or understanding of someone or something, such as facts, information, descriptions, or skills, which is acquired through experience or education by perceiving, discovering, or learning.
-
-Promoting Creativity/Innovation/Invention
-Promote=Nature/Advance/Encourage/Foster
-
-Fostering Innovation
-Fostering Creativity
-
-[useful] http://startbloggingonline.com/101-blog-post-ideas-that-make-your-blog-hot/
-
-1. Where I'd like to travel.
-2. Web Tuts/Help
-
-Inspiring Creaivity
-Inspiring Innovation
-
-Creativity is a phenomenon whereby something new and in some way valuable is created(idea, solution, invention)[wikipedia]
-Innovation is a new idea, device or process
-*/
-
-function initAll(){
-	getTwitterFeeds();
-	getFacebookPageFeeds();
 }
 
 function getTwitterFeeds(){
-	buffer.render("shule_left_container");
+	buffer.render("feed_container");
 	var xhr;
 	var url="twitterlib";
 	if(window.XMLHttpRequest){
@@ -68,28 +40,28 @@ function getTwitterFeeds(){
 			var data=xhr.responseText;
 			data=JSON.parse(data);
 				for(var c=0; c<(data.statuses).length; c++){
-					var shule=_("div");
-					shule.setAttribute("class", "shule");
+					var feed=_("div");
+					feed.setAttribute("class", "feed");
 
-					var shule_spacer=_("div");
-					shule_spacer.setAttribute("class", "spacer");
+					var feed_spacer=_("div");
+					feed_spacer.setAttribute("class", "spacer");
 
 					//null check for the image
 					if(data.statuses[c].entities.media){
 
-						var shule_cover=_("div");
-						shule_cover.setAttribute("class", "shule_cover");
+						var feed_cover=_("div");
+						feed_cover.setAttribute("class", "feed_cover");
 						for(var m in (data.statuses[c].entities.media)){
 							var img=_("img");
 							img.src=data.statuses[c].entities.media[m].media_url;
-							shule_cover.appendChild(img);
+							feed_cover.appendChild(img);
 						}
 					}
-					var shule_details=_("div");
-					shule_details.setAttribute("class", "shule_details");
+					var feed_details=_("div");
+					feed_details.setAttribute("class", "feed_details");
 
-					var shule_pub_det=_("div");
-					shule_pub_det.setAttribute("class", "shule_pub_det");
+					var feed_pub_det=_("div");
+					feed_pub_det.setAttribute("class", "feed_pub_det");
 
 					var auth_spacer=_("div");
 					auth_spacer.setAttribute("class", "spacer");
@@ -118,40 +90,40 @@ function getTwitterFeeds(){
 					//auth_name.appendChild(auth_screen_name);
 					auth_name.appendChild(auth_name_spacer);
 
-					var shule_published=_("div");
-					shule_published.setAttribute("class", "shule_published");
-					shule_published.innerHTML=data.statuses[c].created_at;
+					var feed_published=_("div");
+					feed_published.setAttribute("class", "feed_published");
+					feed_published.innerHTML=data.statuses[c].created_at;
 
 					var auth_details=_("div");
 					auth_details.setAttribute("class", "auth_details");
 					auth_details.appendChild(auth_name);
-					auth_details.appendChild(shule_published);
+					auth_details.appendChild(feed_published);
 
 
-					var shule_author=_("div");
-					shule_author.setAttribute("class", "shule_author");
+					var feed_author=_("div");
+					feed_author.setAttribute("class", "feed_author");
 
-					shule_author.appendChild(auth_img);
-					shule_author.appendChild(auth_details);
-					shule_author.appendChild(auth_spacer);
+					feed_author.appendChild(auth_img);
+					feed_author.appendChild(auth_details);
+					feed_author.appendChild(auth_spacer);
 
-					shule_details.appendChild(shule_author);
+					feed_details.appendChild(feed_author);
 
-					var shule_body=_("div");
-					shule_body.setAttribute("class", "shule_body");
-					shule_body.innerHTML=data.statuses[c].text;
-					shule_details.appendChild(shule_body);
+					var feed_body=_("div");
+					feed_body.setAttribute("class", "feed_body");
+					feed_body.innerHTML=data.statuses[c].text;
+					feed_details.appendChild(feed_body);
 
-					shule.appendChild(shule_details);
+					feed.appendChild(feed_details);
 					if(data.statuses[c].entities.media){
-						shule.appendChild(shule_cover);
+						feed.appendChild(feed_cover);
 
 					}
 
 
-					shule.appendChild(shule_spacer);
+					feed.appendChild(feed_spacer);
 
-					document.getElementById("shule_left_container").appendChild(shule);
+					document.getElementById("feed_container").appendChild(feed);
 
 
 
@@ -163,7 +135,7 @@ function getTwitterFeeds(){
 }
 
 function getFacebookPageFeeds(){
-	//buffer.render("shule_left_right_container");
+	//buffer.render("feed_left_right_container");
 	var xhr;
 	var url="inc/fun.php?fb_page_feed";
 	if(window.XMLHttpRequest){
@@ -178,32 +150,32 @@ function getFacebookPageFeeds(){
 			//buffer.done();
 			var data=xhr.responseText;
 			data=JSON.parse(data);
-			//$("shule_left_right_container").innerHTML=data;
+			//$("feed_left_right_container").innerHTML=data;
 				for(var c=0; c<(data.data).length; c++){
 
 					//alert(c); text, image, user, created_at
 
-					var shule=_("div");
-					shule.setAttribute("class", "shule");
+					var feed=_("div");
+					feed.setAttribute("class", "feed");
 
-					var shule_spacer=_("div");
-					shule_spacer.setAttribute("class", "spacer");
+					var feed_spacer=_("div");
+					feed_spacer.setAttribute("class", "spacer");
 
 					//null check for the image
 					if(data.data[c].full_picture){
 
-						var shule_cover=_("div");
-						shule_cover.setAttribute("class", "shule_cover");
+						var feed_cover=_("div");
+						feed_cover.setAttribute("class", "feed_cover");
 						var img=_("img");
 						img.src=data.data[c].full_picture;
-						shule_cover.appendChild(img);
+						feed_cover.appendChild(img);
 
 					}
-					var shule_details=_("div");
-					shule_details.setAttribute("class", "shule_details");
+					var feed_details=_("div");
+					feed_details.setAttribute("class", "feed_details");
 
-					var shule_pub_det=_("div");
-					shule_pub_det.setAttribute("class", "shule_pub_det");
+					var feed_pub_det=_("div");
+					feed_pub_det.setAttribute("class", "feed_pub_det");
 
 					var auth_spacer=_("div");
 					auth_spacer.setAttribute("class", "spacer");
@@ -232,39 +204,39 @@ function getFacebookPageFeeds(){
 					//auth_name.appendChild(auth_screen_name);
 					auth_name.appendChild(auth_name_spacer);
 
-					var shule_published=_("div");
-					shule_published.setAttribute("class", "shule_published");
-					shule_published.innerHTML=data.data[c].created_time;
+					var feed_published=_("div");
+					feed_published.setAttribute("class", "feed_published");
+					feed_published.innerHTML=data.data[c].created_time;
 
 					var auth_details=_("div");
 					auth_details.setAttribute("class", "auth_details");
 					auth_details.appendChild(auth_name);
-					auth_details.appendChild(shule_published);
+					auth_details.appendChild(feed_published);
 
-					var shule_author=_("div");
-					shule_author.setAttribute("class", "shule_author");
+					var feed_author=_("div");
+					feed_author.setAttribute("class", "feed_author");
 
-					shule_author.appendChild(auth_img);
-					shule_author.appendChild(auth_details);
-					shule_author.appendChild(auth_spacer);
+					feed_author.appendChild(auth_img);
+					feed_author.appendChild(auth_details);
+					feed_author.appendChild(auth_spacer);
 
-					shule_details.appendChild(shule_author);
+					feed_details.appendChild(feed_author);
 
 					if(data.data[c].message){
-						var shule_body=_("div");
-						shule_body.setAttribute("class", "shule_body");
-						shule_body.innerHTML=data.data[c].message;
-						shule_details.appendChild(shule_body);
+						var feed_body=_("div");
+						feed_body.setAttribute("class", "feed_body");
+						feed_body.innerHTML=data.data[c].message;
+						feed_details.appendChild(feed_body);
 					}
 
-					shule.appendChild(shule_details);
+					feed.appendChild(feed_details);
 					if(data.data[c].full_picture){
-						shule.appendChild(shule_cover);
+						feed.appendChild(feed_cover);
 
 					}
-					shule.appendChild(shule_spacer);
+					feed.appendChild(feed_spacer);
 
-					document.getElementById("shule_left_container").appendChild(shule);
+					document.getElementById("feed_container").appendChild(feed);
 				}
 		}
 	}

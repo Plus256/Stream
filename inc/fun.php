@@ -89,4 +89,50 @@ if(isset($_GET['fb_page_feed'])){
     exit;
   }
 }
+
+function elapsedTime($t_stamp){
+	$occurred=strtotime($t_stamp)+(7*60*60);//add 7 hours to cater for Ugandan Time Zone
+	$diff=time()-$occurred;
+	if($diff<60){
+		$elapsed=$diff;
+		if($elapsed==1){
+			$elapsed=$elapsed." Second";
+		}
+		else{
+			$elapsed=$elapsed." Seconds";
+		}
+	}
+	elseif($diff>=60 && $diff<(60*60)){
+		$elapsed=floor($diff/(60));
+		if($elapsed==1){
+			$elapsed=$elapsed." Minute";
+		}
+		else{
+			$elapsed=$elapsed." Minutes";
+		}
+	}
+	elseif($diff>=(60*60) && $diff<(60*60*24)){
+		$elapsed=floor($diff/(60*60));
+		if($elapsed==1){
+			$elapsed=$elapsed." Hour";
+		}
+		else{
+			$elapsed=$elapsed." Hours";
+		}
+	}
+	elseif($diff>=(60*60*24) && $diff<(60*60*24*7)){
+		$elapsed=floor($diff/(60*60*24));
+		if($elapsed==1){
+			$elapsed=$elapsed." Day";
+		}
+		else{
+			$elapsed=$elapsed." Days";
+		}
+	}
+	else{
+		$elapsed=date("M jS, Y", $occurred);
+	}
+	return $elapsed;
+}
+
 ?>

@@ -7,7 +7,7 @@
         <div id="menu">
         	<ul>
               <li><a href="./#start">START</a></li>
-              <li><a href="./#contact">CONTACT</a></li>
+              <li><a href="./#contact" class="contact_button">CONTACT</a></li>
               <li><a href="./#about">ABOUT</a></li>
             </ul>
         </div>
@@ -17,7 +17,7 @@
             <div id="mobile_menu_container">
                 <ul>
                   <li><a href="./#start">START</a></li>
-                  <li><a href="./#contact">CONTACT</a></li>
+                  <li><a href="./#contact" class="contact_button">CONTACT</a></li>
                   <li><a href="./#about">ABOUT</a></li>
                 </ul>
                 <div class="spacer"></div>
