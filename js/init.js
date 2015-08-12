@@ -1,3 +1,4 @@
+//be mindful of dual usage of jQuery and pure JavaScript
 $(document).ready(function(){
 	getTwitterFeeds();
 	getFacebookPageFeeds();
@@ -17,7 +18,7 @@ buffer.render=function(cont){
 		}
 		buffer.innerHTML=statements[thisStatement];
 	}, 5000);
-	document.getElementById(cont).appendChild(buffer);
+	document.getElementById(cont).appendChild(buffer);//we don't use the jquery selector here bcoz it'll think thisz an elem
 }
 buffer.done=function(){
 	buffer.style.display="none";
@@ -123,11 +124,26 @@ function getTwitterFeeds(){
 
 					feed.appendChild(feed_spacer);
 
-					document.getElementById("feed_container").appendChild(feed);
-
-
-
+					$("#feed_container").append(feed);
 				}
+				/*$(document).ready(function(){
+					var items=$(".feed");alert(items.length);
+				});*/
+				/*$('#feed_container').imagesLoaded(function(){
+					var items=$(".feed");alert(items.length);
+					var grid=$('#feed_container').masonry({
+						itemSelector:'.feed',
+						columnWidth:'.feed',
+						isAnimated: true
+					});
+
+					//grid.append(items).masonry("appended", items);
+				});*/
+				$('#feed_container').masonry({
+					itemSelector:'.feed',
+					columnWidth:'.feed',
+					isAnimated: true
+				});
 		}
 	}
 	xhr.send(null);
@@ -236,8 +252,9 @@ function getFacebookPageFeeds(){
 					}
 					feed.appendChild(feed_spacer);
 
-					document.getElementById("feed_container").appendChild(feed);
+					$("#feed_container").append(feed);
 				}
+				//var items=$(".feed");alert(items.length);
 		}
 	}
 	xhr.send(null);
