@@ -4,3 +4,4 @@
   <input type="text" placeholder="Pasword" />
   <input type="button" value="Sign Up" id="signup_button" />
 </div>
+<div id="start_signup_footer"><!--Process Feedback--></div>

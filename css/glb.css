@@ -1867,7 +1867,7 @@ a#hero_start:hover{
 }
 
 #start_signin_main, #start_signup_main{
-	margin-top:2em;
+	margin:2em 0;
 }
 
 #start_signin_header, #start_signup_header{
