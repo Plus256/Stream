@@ -26,11 +26,6 @@ require_once("inc/cnf.php");
 </head>
 <body onkeydown="getKey(event);">
 <noscript id="noscript"><?php echo $noscript; ?></noscript>
-<script>
-$(document).ready(function(){
-	$(".contact_button").click(contact);
-});
-</script>
 <div id="dialog_box_overlay"></div>
 <div id="dialog_box">
 	<div id="dialog_box_head"></div>

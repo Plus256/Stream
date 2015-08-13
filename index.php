@@ -17,6 +17,7 @@ elseif(isset($_POST['login'])){
 else{
   //display home info + login form
   require_once("inc/hero.php");
+  require_once("inc/start.php");
   require_once("inc/trend.php");
 }
 ?>

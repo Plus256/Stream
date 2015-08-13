@@ -44,12 +44,16 @@ a:hover {
 	float:left;
 }
 
-#logo_container svg#logo{
+svg#logo{
 	width:4em;
 	height:5em;
 }
 
-#logo_container svg#logo:hover .st0{
+svg#logo .logo_shape{
+	fill:#766968;
+}
+
+svg#logo:hover .logo_shape{
 	fill:#FBAE17;
 }
 
@@ -71,7 +75,7 @@ a:hover {
 }
 
 #menu ul li a{
-	color:#555;
+	color:#766968;
 	text-decoration:none;
 	padding-bottom:10px;
 	font-size:80%;
@@ -89,7 +93,7 @@ a:hover {
 
 .mobile_menu_icon_stripe{
 	padding:2px 10px;
-	background:#555;
+	background:#766968;
 }
 
 .mobile_menu_icon_stripe:nth-child(2){
@@ -135,9 +139,9 @@ a:hover {
 	right:0;
 }
 
-#mobile_menu:hover div#mobile_menu_icon .mobile_menu_icon_stripe{
+/*#mobile_menu:hover div#mobile_menu_icon .mobile_menu_icon_stripe{
 	background:#000;
-}
+}*/
 
 #mobile_menu ul{
 	margin:0;
@@ -149,7 +153,7 @@ a:hover {
 	display:block;
 	padding:10px;
 	font-size:80%;
-	color:#000;
+	color:#766968;
 	line-height:2em;
 	text-decoration:none;
 }
@@ -218,18 +222,6 @@ a:hover {
 	line-height:5em;
 	font-weight:bold;
 	font-family:minion pro;
-}
-
-#buffer {
-	font-size:80%;
-	text-align:center;
-	padding:2em 0;
-	background:rgb(251, 174, 23);
-	background:rgba(251, 174, 23, 0.75);
-	color:#FFF;
-	float:left;
-	width:100%;
-	margin-bottom:10px;
 }
 
 #noscript{
@@ -814,46 +806,6 @@ Give the second/middle element an auto margin so that it centres itself inside t
 #desktop_guest_review{
 	width:50%;
 	float:left;
-}
-
-#sponsor_partner{
-	font-size:90%;
-	padding:10px;
-	overflow:hidden;
-}
-
-.partner_logo{
-	float:left;
-	width:3.5em;
-	height:3.5em;
-	border-radius:5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	-ms-border-radius:5px;
-	-o-border-radius:5px;
-	overflow:hidden;
-}
-
-.partner_logo img{
-	width:100%;
-	height:auto;
-}
-
-.partner_summary{
-	overflow:hidden;
-	padding-left:10px;
-}
-
-.partner_name{
-	font-weight:bold;
-}
-
-.partner_description{
-
-}
-
-.partner_more{
-	color:#FBAE17;
 }
 
 #gallery_body{
@@ -1830,7 +1782,7 @@ display:block;
 
 #hero_with{
 	font-size:120%;
-	color:#555;
+	color:#766968;
 }
 
 a#hero_start{
@@ -1846,7 +1798,7 @@ a#hero_start{
 a#hero_start:hover{
 	background:none;
 	color:#000;
-	border:1px solid #000;
+	border:1px solid #766968;
 }
 
 #trending{
@@ -1854,9 +1806,84 @@ a#hero_start:hover{
 	background:#EFEFEF;
 }
 
-#trending_header{
+#trending_header, #start_header{
 	padding:1em 0;
 	text-align:center;
+	font-size:200%;
+	color:#766968;
+}
+
+#start{
+	background:#F5F5F5;
+	text-align:center;
+	padding-bottom:5em;
+}
+
+#buffer {
+	font-size:80%;
+	text-align:center;
+	padding:2em 0;
+	background:rgb(251, 174, 23);
+	background:rgba(251, 174, 23, 0.75);
+	color:#FFF;
+	float:left;
+	width:100%;
+	margin-bottom:10px;
+}
+
+#start input[type="text"]{
+	display:inline-block;
+	border:1px solid #CCC;
+	background:#FFF;
 	font-size:120%;
-	color:#555;
+	margin:0;
+	vertical-align:middle;
+}
+
+#start input[type="button"]{/*box-sizing is set by default*/
+	display:inline-block;
+	border:none;
+	transition:none;
+	-moz-transition:none;
+	-webkit-transition:none;
+	-o-transition:none;
+	padding:12px 2em;
+	vertical-align:middle;
+	font-size:100%;
+}
+
+#start input[type="button"]#signin_button{/*box-sizing is set by default*/
+	background:#5BBC2E;
+}
+
+#start input[type="button"]#signup_button{/*box-sizing is set by default*/
+	background:#FBAE17;
+}
+
+#start input[type="button"]:hover {
+	box-shadow:none;
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+}
+
+#start_signin_main, #start_signup_main{
+	margin-top:2em;
+}
+
+#start_signin_header, #start_signup_header{
+	font-style:italic;
+}
+
+#start_signin_header{
+	color:#5BBC2E;
+}
+
+#start_signup_header{
+	color:#FBAE17;
+}
+
+#in_or_up{
+	text-align:center;
+	color:#766968;
+	margin:5em 0;
 }

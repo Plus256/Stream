@@ -1,9 +1,10 @@
 //be mindful of dual usage of jQuery and pure JavaScript
 $(document).ready(function(){
-if(document.getElementById("trend_main")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
-		getTwitterFeeds();
-		getFacebookPageFeeds();
-	}
+	$(".contact_button").click(contact);
+	if(document.getElementById("trend_main")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
+			getTwitterFeeds();
+			getFacebookPageFeeds();
+		}
 });
 
 var buffer=new Buffer();
