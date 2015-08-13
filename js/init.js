@@ -1,6 +1,6 @@
 //be mindful of dual usage of jQuery and pure JavaScript
 $(document).ready(function(){
-if(document.getElementById("feed_container")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
+if(document.getElementById("trend_main")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
 		getTwitterFeeds();
 		getFacebookPageFeeds();
 	}
@@ -20,7 +20,7 @@ buffer.render=function(cont){
 		}
 		buffer.innerHTML=statements[thisStatement];
 	}, 5000);
-	document.getElementById(cont).appendChild(buffer);//we don't use the jquery selector here bcoz it'll think thisz an elem
+	document.getElementById("trend_main").appendChild(buffer);//we don't use the jquery selector here bcoz it'll think thisz an elem
 }
 buffer.done=function(){
 	buffer.style.display="none";
@@ -126,9 +126,9 @@ function getTwitterFeeds(){
 
 					feed.appendChild(feed_spacer);
 
-					$("#feed_container").append(feed);
+					$("#trend_main").append(feed);
 				}
-				$('#feed_container').masonry({
+				$('#trend_main').masonry({
 					itemSelector:'.feed',
 					columnWidth:'.feed',
 					isAnimated: true
@@ -241,7 +241,7 @@ function getFacebookPageFeeds(){
 					}
 					feed.appendChild(feed_spacer);
 
-					$("#feed_container").append(feed);
+					$("#trend_main").append(feed);
 				}
 				//var items=$(".feed");alert(items.length);
 		}

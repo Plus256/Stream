@@ -197,12 +197,17 @@
 	}
 
 	.feed{
-		width:auto;/*off-setting margin length*/
+		width:calc(100% - 20px);/*off-setting margin length*/
 		float:none;
+		margin-right:0;
 	}
 
 	#hero_intro{
-		padding:0 0 1em 0;
+		padding:5em 0 1em 0;
+	}
+
+	#trend_main{
+		padding:0 10px
 	}
 
 }
