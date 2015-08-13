@@ -23,6 +23,6 @@ $full_name="Stream";
 $slogan="Live Event Streaming";
 $sponsor="Plus256";
 $meta_keywords="Stream, Live Event Streaming, Social Wall";
-$logo="gra/logo.png";
+$logo="gra/logo_dark.png";
 $noscript="Enable JavaScript in your browser to have the best experience at ".$short_name;
 ?>
