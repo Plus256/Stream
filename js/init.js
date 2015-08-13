@@ -1,7 +1,9 @@
 //be mindful of dual usage of jQuery and pure JavaScript
 $(document).ready(function(){
-	getTwitterFeeds();
-	getFacebookPageFeeds();
+if(document.getElementById("feed_container")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
+		getTwitterFeeds();
+		getFacebookPageFeeds();
+	}
 });
 
 var buffer=new Buffer();
@@ -41,7 +43,7 @@ function getTwitterFeeds(){
 			var data=xhr.responseText;
 			data=JSON.parse(data);
 				for(var c=0; c<(data.statuses).length; c++){
-					var feed=_("div");
+					var feed=_("article");
 					feed.setAttribute("class", "feed");
 
 					var feed_spacer=_("div");
@@ -126,19 +128,6 @@ function getTwitterFeeds(){
 
 					$("#feed_container").append(feed);
 				}
-				/*$(document).ready(function(){
-					var items=$(".feed");alert(items.length);
-				});*/
-				/*$('#feed_container').imagesLoaded(function(){
-					var items=$(".feed");alert(items.length);
-					var grid=$('#feed_container').masonry({
-						itemSelector:'.feed',
-						columnWidth:'.feed',
-						isAnimated: true
-					});
-
-					//grid.append(items).masonry("appended", items);
-				});*/
 				$('#feed_container').masonry({
 					itemSelector:'.feed',
 					columnWidth:'.feed',
@@ -171,7 +160,7 @@ function getFacebookPageFeeds(){
 
 					//alert(c); text, image, user, created_at
 
-					var feed=_("div");
+					var feed=_("article");
 					feed.setAttribute("class", "feed");
 
 					var feed_spacer=_("div");

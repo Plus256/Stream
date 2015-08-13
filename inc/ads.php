@@ -1,7 +1,7 @@
 <?php
 ?>
-<div id="ads">
-  
-</div>
+<aside id="ads">
+
+</aside>
 <?php
 ?>

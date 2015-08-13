@@ -1372,7 +1372,6 @@ a#sponsor_link{
 }
 
 #main_content{
-	padding:10px 10px 0 10px;
 	background:#EAEAEA;
 }
 
@@ -1799,4 +1798,45 @@ color:#A1A1A1;
 .auth_img img{
 display:block;
 
+}
+
+#hero{
+	/*min-height:40em;*/
+}
+
+#hero_intro{
+	text-align:center;
+	padding:10em 0;
+}
+
+#hero_engage{
+	font-weight:bold;
+	font-size:500%;
+}
+
+#hero_separate{
+	border-bottom:1px solid #CCC;
+	width:60%;
+	margin:1em auto 1em auto;
+}
+
+#hero_with{
+	font-size:120%;
+	color:#555;
+}
+
+a#hero_start{
+	display:inline-block;
+	text-decoration:none;
+	padding:1em 5em;
+	background:#FBAE17;
+	color:#FFF;
+	margin-top:3em;
+	border:1px solid #F90;
+}
+
+a#hero_start:hover{
+	background:none;
+	color:#000;
+	border:1px solid #000;
 }
