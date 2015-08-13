@@ -1387,6 +1387,9 @@ a#sponsor_link{
 	margin-right:5px;
 	background:#FFF;
 	box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
+	-o-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .feed a{
