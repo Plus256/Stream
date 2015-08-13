@@ -1,6 +1,6 @@
 <header id="banner">
     <div class="wrapper">
-        <div id="logo"><a href="./"><img src="<?php echo $logo; ?>" /></a></div>
+        <div id="logo_container"><a href="./"><?php echo file_get_contents("gra/logo.svg"); ?></a></div>
     	<div id="short_name">
         	<?php //echo $short_name; ?>
         </div>

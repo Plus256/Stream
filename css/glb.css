@@ -40,23 +40,17 @@ a:hover {
 	-o-box-shadow:0 5px 5px rgba(0, 0, 0, 0.2);
 }
 
-#logo{
+#logo_container{
 	float:left;
-	height:5em;
 }
 
-#logo:before{    /* create a full-height inline block pseudo=element */
-    content:' ';
-    display:inline-block;
-    vertical-align:middle;  /* vertical alignment of the inline element */
-    height:100%;
-}
-
-#logo img{
+#logo_container svg#logo{
 	width:4em;
-	height:auto;
-	display:inline-block;
-    vertical-align:middle;
+	height:4em;
+}
+
+#logo_container svg#logo:hover .st0{
+	fill:#FBAE17;
 }
 
 #menu{
