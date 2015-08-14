@@ -20,9 +20,9 @@ $conn=mysqli_connect($host, $user, $pwd, $db, $port) or die(mysqli_error());
 /*end of remote*/
 $short_name="Stream";
 $full_name="Stream";
-$slogan="Live Event Streaming";
+$slogan="Live Social Feeds";
 $sponsor="Plus256";
-$meta_keywords="Stream, Live Event Streaming, Social Wall";
+$meta_keywords="Stream, Live Social Feeds, Social Wall";
 $logo="gra/logo_dark.png";
 $noscript="Enable JavaScript in your browser to have the best experience at ".$short_name;
 ?>

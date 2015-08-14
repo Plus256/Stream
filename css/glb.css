@@ -1136,7 +1136,7 @@ input[type="button"].apply_submit_but:hover{
 	padding:1em 0;
 }
 
-input[type="text"]{
+input[type="text"], input[type="password"]{
 	box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
@@ -1775,7 +1775,7 @@ display:block;
 }
 
 #hero_separate{
-	border-bottom:1px solid #CCC;
+	border-bottom:1px dashed #766968;
 	width:60%;
 	margin:1em auto 1em auto;
 }
@@ -1831,7 +1831,7 @@ a#hero_start:hover{
 	margin-bottom:10px;
 }
 
-#start input[type="text"]{
+#start input[type="text"], #start input[type="password"]{
 	display:inline-block;
 	border:1px solid #CCC;
 	background:#FFF;
@@ -1850,6 +1850,10 @@ a#hero_start:hover{
 	padding:12px 2em;
 	vertical-align:middle;
 	font-size:100%;
+	box-shadow:0 2px 2px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.4);
+	-webkit-box-shadow:0 2px 2px rgba(0, 0, 0, 0.4);
+	-o-box-shadow:0 2px 2px rgba(0, 0, 0, 0.4);
 }
 
 #start input[type="button"]#signin_button{/*box-sizing is set by default*/
@@ -1861,9 +1865,10 @@ a#hero_start:hover{
 }
 
 #start input[type="button"]:hover {
-	box-shadow:none;
-	-moz-box-shadow:none;
-	-webkit-box-shadow:none;
+	box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-o-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 #start_signin_main, #start_signup_main{
