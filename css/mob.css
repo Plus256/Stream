@@ -22,6 +22,14 @@
 		margin:0 auto 10px auto;
 		display:block;
 	}
+
+	/*#trend_main{
+		padding-left:5px;
+	}*/
+
+	.feed{
+		width:calc(100% / 3 - 5px);
+	}
 }
 
 /* tablets portrait*/
@@ -33,6 +41,19 @@
 
 	#feed_right_container{
 		padding-left:0;
+	}
+
+	#start input[type="text"], #start input[type="password"]{
+		margin:0 auto 10px auto;
+		display:block;
+	}
+
+	/*#trend_main{
+		padding-left:5px;
+	}*/
+
+	.feed{
+		width:calc(100% / 3 - 5px);
 	}
 }
 
@@ -225,5 +246,4 @@
 		display:block;
 		width:100%;
 	}
-
 }
