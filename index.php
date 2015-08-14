@@ -9,11 +9,7 @@ if(!empty($_SESSION['logged'])){
   $user=$_SESSION['logged'];
   require_once("inc/pst.php");
 }
-//login attempt
-elseif(isset($_POST['login'])){
-  //handle login here
-}
-//no attempt
+//default
 else{
   //display home info + login form
   require_once("inc/hero.php");

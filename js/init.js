@@ -1,6 +1,8 @@
 //be mindful of dual usage of jQuery and pure JavaScript
 $(document).ready(function(){
 	$(".contact_button").click(contact);
+	$("#signup_button").click(signUp);
+	$("#signin_button").click(signIn);
 	if(document.getElementById("trend_main")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
 			getTwitterFeeds();
 			getFacebookPageFeeds();
@@ -11,7 +13,7 @@ var buffer=new Buffer();
 buffer.render=function(cont){
 	buffer.setAttribute("id", "buffer");
 	buffer.style.display="block";//remains with none attribute, so we either set this display or remove it on done()
-	var statements=new Array("Fetching Content", "In Just a Moment", "Stream Live");
+	var statements=new Array("Sending Request", "In Just a Moment", "Stream Live");
 	var thisStatement=0;
 	buffer.innerHTML=statements[thisStatement];
 	setInterval(function (){
@@ -21,14 +23,14 @@ buffer.render=function(cont){
 		}
 		buffer.innerHTML=statements[thisStatement];
 	}, 5000);
-	document.getElementById("trend_main").appendChild(buffer);//we don't use the jquery selector here bcoz it'll think thisz an elem
+	document.getElementById(cont).appendChild(buffer);//we don't use the jquery selector here bcoz it'll think thisz an elem
 }
 buffer.done=function(){
 	buffer.style.display="none";
 }
 
 function getTwitterFeeds(){
-	buffer.render("feed_container");
+	buffer.render("trend_main");
 	var xhr;
 	var url="twitterlib";
 	if(window.XMLHttpRequest){
@@ -141,7 +143,7 @@ function getTwitterFeeds(){
 }
 
 function getFacebookPageFeeds(){
-	//buffer.render("feed_left_right_container");
+	buffer.render("trend_main");
 	var xhr;
 	var url="inc/fun.php?fb_page_feed";
 	if(window.XMLHttpRequest){
@@ -153,7 +155,7 @@ function getFacebookPageFeeds(){
 	xhr.open("GET", url);
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
-			//buffer.done();
+			buffer.done();
 			var data=xhr.responseText;
 			data=JSON.parse(data);
 			//$("feed_left_right_container").innerHTML=data;
@@ -256,4 +258,104 @@ function Buffer(){
 
 function _(tag_name){
 	return document.createElement(tag_name);
+}
+
+function signUp(){
+	document.getElementById("start_signup_footer").innerHTML="Sending...";
+	var xhr;
+	var url="inc/fun.php?signup_req";
+	var email=document.getElementById("signup_email").value;//we need to learn the jQuery way of getting the value
+	var password=document.getElementById("signup_password").value;
+	var fd="email="+email+"&password="+password+"";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("POST", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			var data=xhr.responseText;
+			var fed_b;
+			switch(data){
+				case "0":
+					fed_b="Email not Available. Use a different one, or Sign In."
+					document.getElementById("start_signup_footer").style.color="#09F";
+				break;
+				case "2":
+					fed_b="Thank you. Check your mail for a link on how to proceed."
+					document.getElementById("start_signup_footer").style.color="#090";
+				break;
+				case "3":
+					fed_b="Something went wrong. Check your connection."
+					document.getElementById("start_signup_footer").style.color="#F00";
+				break;
+				case "4":
+					fed_b="Both Fields are Required."
+					document.getElementById("start_signup_footer").style.color="#F00";
+				break;
+				case "1":
+					fed_b="Make sure the Email is Valid."
+					document.getElementById("start_signup_footer").style.color="#F00";
+				break;
+			}
+			document.getElementById("start_signup_footer").innerHTML=fed_b;
+			setTimeout(function (){
+					document.getElementById("start_signup_footer").innerHTML="&nbsp;";
+					document.getElementById("signup_email").value="";
+					document.getElementById("signup_password").value="";
+			}, 2000);
+		}
+	}
+	xhr.send(fd);
+}
+
+function signIn(){
+	document.getElementById("start_signin_footer").innerHTML="Sending...";
+	var xhr;
+	var url="inc/fun.php?signin_req";
+	var email=document.getElementById("signin_email").value;//we need to learn the jQuery way of getting the value
+	var password=document.getElementById("signin_password").value;
+	var fd="email="+email+"&password="+password+"";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("POST", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			var data=xhr.responseText;
+			var fed_b;
+			switch(data){
+				case "0":
+					fed_b="You should consider Signing up."
+					document.getElementById("start_signin_footer").style.color="#09F";
+				break;
+				case "1":
+					fed_b="Redirecting..."
+					document.getElementById("start_signin_footer").style.color="#090";
+				break;
+				case "2":
+					fed_b="Both Fields are Required."
+					document.getElementById("start_signin_footer").style.color="#F00";
+				break;
+				case "3":
+					fed_b="You're missing out something. <a href='#' style='color:#766968;'>Reset password?</a>"
+					document.getElementById("start_signin_footer").style.color="#F00";
+				break;
+			}
+			document.getElementById("start_signin_footer").innerHTML=fed_b;
+			setTimeout(function (){
+					document.getElementById("start_signin_footer").innerHTML="&nbsp;";
+					document.getElementById("signin_email").value="";
+					document.getElementById("signin_password").value="";
+			}, 3000);
+		}
+	}
+	xhr.send(fd);
 }

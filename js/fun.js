@@ -207,9 +207,7 @@ function sendMsg(){
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
 			buffer.done();
-			var data=xhr.responseText;
-			data=JSON.parse(data);
-			var ret=data.ret;
+			var ret=xhr.responseText;
 			if(ret=="0"){//problem with email address
 				document.getElementById("frm").value=frm_placeholder;//remove any junk and reset field
 				document.getElementById("frm").style.color="#F00";

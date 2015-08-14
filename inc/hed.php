@@ -12,7 +12,7 @@ require_once("inc/cnf.php");
 <link rel="shortcut icon" href="gra/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" type="text/css" href="css/glb.css" />
 <link rel="stylesheet" type="text/css" href="css/mob.css" />
-<title><?php echo $slogan; ?></title>
+<title><?php echo $short_name." - ".$slogan; ?></title>
 <!--Plus256 Network, Ltd ~ www.plus256.com-->
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>-->
