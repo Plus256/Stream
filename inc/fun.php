@@ -207,7 +207,7 @@ function sendMsg($to,$frm, $sbj, $msg){
 	$html_msg.='<style type="text/css">';
 	$html_msg.='a{text-decoration:none; color:#09F;} a:hover{text-decoration:underline;}';
 	$html_msg.='body{width:70%; margin:auto; font-family:Verdana, Geneva, sans-serif; font-size:120%; color:#036; background:#FFF;}';
-	$html_msg.='#msg_hed{padding:10px; background:rgb(255, 0, 0); color:#FFF; font-weight:bold;}';
+	$html_msg.='#msg_hed{padding:10px; background:rgb(251, 174, 23); color:#FFF; font-weight:bold;}';
 	$html_msg.='#msg_hed{border-radius:10px 10px 0 0; -moz-border-radius:10px 10px 0 0; -webkit-border-radius:10px 10px 0 0;}';
 	$html_msg.='#msg_bod{padding:10px;}';
 	$html_msg.='#msg_fot{padding:10px; font-size:85%; color:#A1A1A1; text-align:center; border:1px solid #EAEAEA;}';
