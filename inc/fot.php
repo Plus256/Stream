@@ -12,7 +12,7 @@
 						<a href="./#about">About</a>
             <div class="spacer"></div>
         </div>
-        <div id="copyright">Powered by <?php echo " <a href='http://plus256.com' target='_NEW' id='sponsor_link'>".$sponsor."</a>"; ?></div>
+        <div id="copyright">Copyright &copy; <?php echo date('Y')." <a href='http://plus256.com' target='_NEW' id='sponsor_link'>".$sponsor."</a>"; ?></div>
     	<div class="spacer"></div>
     </div>
     <div id="fb-root"></div>

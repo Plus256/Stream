@@ -348,6 +348,10 @@ function signIn(){
 					fed_b="You're missing out something. <a href='#' style='color:#766968;'>Reset password?</a>"
 					document.getElementById("start_signin_footer").style.color="#F00";
 				break;
+				case "4":
+					fed_b="Confirm your Email. <a href='#' style='color:#766968;'>Resend confirmation?</a>"
+					document.getElementById("start_signin_footer").style.color="#F00";
+				break;
 			}
 			document.getElementById("start_signin_footer").innerHTML=fed_b;
 			setTimeout(function (){

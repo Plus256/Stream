@@ -43,16 +43,24 @@ if(isset($_GET['signin_req'])){
       echo "0";//no email in db
     }
     else{//login
-      $hash=hash('sha256', $password);
-      $q=mysqli_query($conn, "select id from user where email='$email' and pwd='$hash'");
-      if(mysqli_num_rows($q)>0){
-        echo "1";//redirect
-        /*$r=mysqli_fetch_assoc($q);
-    		$_SESSION['adm_logged']=$r['id'];
-    		header('Location: '.$_SERVER['PHP_SELF'].'');*/
+      $q=mysqli_query($conn, "select status from user where email='$email'");
+      $r=mysqli_fetch_assoc($q);
+      $status=$r['status'];
+      if($status==1){//email confirmed
+        $hash=hash('sha256', $password);
+        $q=mysqli_query($conn, "select id from user where email='$email' and pwd='$hash'");
+        if(mysqli_num_rows($q)>0){
+          echo "1";//redirect
+          /*$r=mysqli_fetch_assoc($q);
+      		$_SESSION['adm_logged']=$r['id'];
+      		header('Location: '.$_SERVER['PHP_SELF'].'');*/
+        }
+        else{
+          echo "3";//mismatch
+        }
       }
       else{
-        echo "3";//mismatch
+        echo "4";//confirm email
       }
     }
 	}
@@ -206,26 +214,20 @@ function sendMsg($to,$frm, $sbj, $msg){
 	/////////The Style Sheet//////////////////////////////////////////////////////////////////
 	$html_msg.='<style type="text/css">';
 	$html_msg.='a{text-decoration:none; color:#09F;} a:hover{text-decoration:underline;}';
-	$html_msg.='body{width:70%; margin:auto; font-family:Verdana, Geneva, sans-serif; font-size:120%; color:#036; background:#FFF;}';
-	$html_msg.='#msg_hed{padding:10px; background:rgb(251, 174, 23); color:#FFF; font-weight:bold;}';
-	$html_msg.='#msg_hed{border-radius:10px 10px 0 0; -moz-border-radius:10px 10px 0 0; -webkit-border-radius:10px 10px 0 0;}';
-	$html_msg.='#msg_bod{padding:10px;}';
-	$html_msg.='#msg_fot{padding:10px; font-size:85%; color:#A1A1A1; text-align:center; border:1px solid #EAEAEA;}';
-	$html_msg.='#msg_fot{border-radius:0 0 10px 10px; -moz-border-radius:0 0 10px 10px; -webkit-border-radius:0 0 10px 10px;}';
 	$html_msg.='</style>';
 	/////////////////////////////////////////////////////////////////////////////////////////
 	$html_msg.='</head>';
-	$html_msg.='<body>';
+	$html_msg.='<body style="width:70%; margin:auto; font-family:Verdana, Geneva, sans-serif; font-size:120%; color:#036; background:#FFF;">';
 	///////////////////
-	$html_msg.='<div id="msg_hed">';
+	$html_msg.='<div style="padding:10px; background:rgb(251, 174, 23); color:#FFF; font-weight:bold; border-radius:10px 10px 0 0; -moz-border-radius:10px 10px 0 0; -webkit-border-radius:10px 10px 0 0;">';
 	$html_msg.=$sbj;
 	$html_msg.='</div>';
 	///////////////////////////
-	$html_msg.='<div id="msg_bod">';
+	$html_msg.='<div style="padding:10px;">';
 	$html_msg.=$msg;
 	$html_msg.='</div>';
 	//////////////////////////
-	$html_msg.='<div id="msg_fot">';
+	$html_msg.='<div style="padding:10px; font-size:85%; color:#A1A1A1; text-align:center; border:1px solid #EAEAEA; border-radius:0 0 10px 10px; -moz-border-radius:0 0 10px 10px; -webkit-border-radius:0 0 10px 10px;">';
 	$html_msg.=$msg_fot;
 	$html_msg.='</div>';
 	//////////////////////////
