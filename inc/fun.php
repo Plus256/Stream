@@ -21,7 +21,7 @@ if(isset($_GET['signup_req'])){
 		    	$q=mysqli_query($conn, "insert into user (email, pwd, dp) values ('$email', '$hash', 1)");
 			    if($q){//successful sign up
 			    	$to=$email;
-			    	$frm="stream@plus256.com";
+			    	$frm="Stream<stream@plus256.com>";
 			    	$sbj="Welcome";
 			    	$msg="Thank you for Signing up. Follow link to Proceed.";
 			    	sendMsg($to, $frm, $sbj, $msg);
