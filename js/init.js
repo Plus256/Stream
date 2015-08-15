@@ -337,6 +337,7 @@ function signIn(){
 					document.getElementById("start_signin_footer").style.color="#09F";
 				break;
 				case "1":
+					location.reload(true);//set to true so as to load from server - not browser cache
 					fed_b="Redirecting..."
 					document.getElementById("start_signin_footer").style.color="#090";
 				break;

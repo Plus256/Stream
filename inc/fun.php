@@ -22,7 +22,7 @@ if(isset($_GET['signup_req'])){
 			    if($q){//successful sign up
 			    	$to=$email;
 			    	$frm="stream@plus256.com";
-			    	$sbj="Stream | Live Social Feeds";
+			    	$sbj="Welcome";
 			    	$msg="Thank you for Signing up. Follow link to Proceed.";
 			    	sendMsg($to, $frm, $sbj, $msg);
 			    }
@@ -207,7 +207,7 @@ function elapsedTime($t_stamp){
 function sendMsg($to,$frm, $sbj, $msg){
 	//msg lines should not exceed 70 characters. it's a PHP rule, so we wrap
 	$msg=wordwrap($msg, 70);
-	$msg_fot='Copyright &copy; '.date('Y').' <a href="http://www.plus256.com" target="_NEW">Plus256 Network</a>';
+	$msg_fot='Copyright &copy; '.date('Y').' <a href="http://www.plus256.com" target="_NEW">Plus256 Network, Ltd</a>';
 	//HTML message formatting/////////////////////////////////////////////////////////////////////////////////////////////////
 	$html_msg='<html>';
 	$html_msg.='<head>';
