@@ -24,12 +24,12 @@
         <?php
         if(mysqli_num_rows($r)>0){//button to create more streams
           ?>
-          <a href="#" class="user_dash_main_cpanel_but" id="new_stream_button">+</a>
+          <a href="#" class="user_dash_main_cpanel_but" id="new_stream_button"><?php echo file_get_contents("gra/ic_add.svg"); ?></a>
           <?php
         }
         else{//button to save first stream
           ?>
-          <a href="#" class="user_dash_main_cpanel_but" id="save_stream_button">#</a>
+          <a href="#" class="user_dash_main_cpanel_but" id="save_stream_button"><?php echo file_get_contents("gra/ic_save.svg"); ?></a>
           <?php
         }
         ?>
@@ -38,7 +38,7 @@
         new: save, cancel
         view: edit, new
         we're using icons for these
-        <a href="#" class="user_dash_main_cpanel_but" id="save_stream_button">#</a>
+        <a href="#" class="user_dash_main_cpanel_but" id="save_stream_button"></a>
         <a href="#" class="user_dash_main_cpanel_but" id="new_stream_button">+</a>
         <a href="#" class="user_dash_main_cpanel_but" id="cancel_stream_button">/</a>
         <a href="#" class="user_dash_main_cpanel_but" id="edit_stream_button">~</a>

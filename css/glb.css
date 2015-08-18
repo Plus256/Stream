@@ -1961,6 +1961,10 @@ a.user_dash_main_cpanel_but{
 	-o-border-radius:100%;
 }
 
+a.user_dash_main_cpanel_but svg{
+	vertical-align:middle;
+}
+
 a.user_dash_main_cpanel_but:hover{
 	box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
