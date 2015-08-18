@@ -52,7 +52,7 @@ if(window.addEventListener){
 		if(frm.value==frm_placeholder){
 			frm.value="";
 		}
-		frm.style.color="#036";
+		frm.style.color="#766968";
 		e.preventDefault();
 	}, false);
 }
@@ -61,7 +61,7 @@ else{
 		if(frm.value==frm_placeholder){
 			frm.value="";
 		}
-		frm.style.color="#036";
+		frm.style.color="#766968";
 	};
 }
 ///
@@ -93,7 +93,7 @@ if(window.addEventListener){
 		if(sbj.value==sbj_placeholder){
 			sbj.value="";
 		}
-		sbj.style.color="#036";
+		sbj.style.color="#766968";
 		e.preventDefault();
 	}, false);
 }
@@ -102,7 +102,7 @@ else{
 		if(sbj.value==sbj_placeholder){
 			sbj.value="";
 		}
-		sbj.style.color="#036";
+		sbj.style.color="#766968";
 	};
 }
 ///
@@ -154,7 +154,7 @@ if(window.addEventListener){
 		if(this.innerHTML==msg_placeholder){
 			this.innerHTML="";
 		}
-		this.style.color="#036";
+		this.style.color="#766968";
 		e.preventDefault();
 	}, false);
 }
@@ -163,7 +163,7 @@ else{
 		if(this.innerHTML==msg_placeholder){
 			this.innerHTML="";
 		}
-		this.style.color="#036";
+		this.style.color="#766968";
 	};
 }
 ///

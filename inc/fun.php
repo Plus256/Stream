@@ -1,7 +1,59 @@
 <?php
 require_once("cnf.php");
 
-
+if(isset($_GET['save_stream'])){
+  if(!empty($_POST['fb']) || !empty($_POST['twt'])){//at least one source
+    if(!empty($_POST['name'])){
+      $name=cleanInput($_POST['name']);
+    }
+    else{
+      $name="Stream";
+    }
+    $user_id=$_SESSION['logged'];
+    $q=mysqli_query($conn, "insert into stream (name, user) values ('$name', $user_id)");
+    if($q){
+      mysql_query("select last_insert_id() into @stream");
+      if(!empty($_POST['fb']) && !empty($_POST['twt'])){//if both sources are provided
+        $fb=cleanInput($_POST['fb']);
+        $twt=cleanInput($_POST['twt']);
+        $q=mysqli_query($conn, "insert into source (type, url) values (0, $fb), (1, $twt)");
+        if($q){
+          mysql_query("select last_insert_id() into @source");
+          $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values (@source, @stream)");
+          if($q){
+            echo "1";
+          }
+        }
+        else{
+          echo "0";
+        }
+      }
+      elseif(!empty($_POST['twt']) && empty($_POST['fb'])){//if twitter alone is provided
+        $twt=cleanInput($_POST['twt']);
+        $q=mysqli_query($conn, "insert into source (type, url) values (1, $twt)");
+        if($q){
+          echo "1";
+        }
+        else{
+          echo "0";
+        }
+      }
+      else{//if facebook alone is provided
+        $fb=cleanInput($_POST['fb']);
+        $q=mysqli_query($conn, "insert into source (type, url) values (0, $fb)");
+        if($q){
+          echo "1";
+        }
+        else{
+          echo "0";
+        }
+      }
+    }
+	}
+	else{
+		echo "2";
+	}
+}
 
 if(isset($_GET['signup_req'])){
   if(!empty($_POST['email']) && !empty($_POST['password'])){
@@ -18,12 +70,27 @@ if(isset($_GET['signup_req'])){
 		    }
 		    else{
           $hash=hash('sha256', $password);
-		    	$q=mysqli_query($conn, "insert into user (email, pwd, dp) values ('$email', '$hash', 1)");
+          $vkey=hash('sha256', $email.uniqid(rand()));
+		    	$q=mysqli_query($conn, "insert into user (email, pwd, vkey, dp) values ('$email', '$hash', '$vkey', 1)");
 			    if($q){//successful sign up
 			    	$to=$email;
 			    	$frm="Stream<stream@plus256.com>";
 			    	$sbj="Welcome";
-			    	$msg="Thank you for Signing up. Follow link to Proceed.";
+
+            $msg='<div style="text-align:center;">';
+            $msg.='<div>';
+          	$msg.='Thank you for Signing up.';
+          	$msg.='</div>';
+
+            $msg.='<div>';
+          	$msg.='It\'d be nice if you created a username, and also added a dp, as soon as you got in.';
+          	$msg.='</div>';
+
+            $msg.='<a href="http://plus256.com/stream/verify.php?vkey='.$vkey.'" style="display:inline-block; text-decoration:none; padding:1em 5em; background:#FBAE17; color:#FFF; margin-top:3em; border:1px solid #F90;">';
+          	$msg.='PROCEED';
+          	$msg.='</a>';
+            $msg.='</div>';
+
 			    	sendMsg($to, $frm, $sbj, $msg);
 			    }
 		    }
@@ -50,10 +117,9 @@ if(isset($_GET['signin_req'])){
         $hash=hash('sha256', $password);
         $q=mysqli_query($conn, "select id from user where email='$email' and pwd='$hash'");
         if(mysqli_num_rows($q)>0){
-          echo "1";//redirect
-          /*$r=mysqli_fetch_assoc($q);
-      		$_SESSION['adm_logged']=$r['id'];
-      		header('Location: '.$_SERVER['PHP_SELF'].'');*/
+          echo "1";//redirect and set session
+          $r=mysqli_fetch_assoc($q);
+      		$_SESSION['logged']=$r['id'];
         }
         else{
           echo "3";//mismatch

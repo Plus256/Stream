@@ -7,6 +7,9 @@ $(document).ready(function(){
 			getTwitterFeeds();
 			getFacebookPageFeeds();
 		}
+		if(document.getElementById("user_flyout")){
+			document.getElementById("user_flyout_dp").addEventListener("click", toggleMenu, false);
+		}
 });
 
 var buffer=new Buffer();
@@ -260,6 +263,52 @@ function _(tag_name){
 	return document.createElement(tag_name);
 }
 
+function saveStream(){
+	document.getElementById("user_dash_main_feedback").innerHTML="Sending...";
+	var xhr;
+	var url="inc/fun.php?save_stream";
+	var name=document.getElementById("new_stream_name").value;//we need to learn the jQuery way of getting the value
+	var fb=document.getElementById("new_stream_fb").value;
+	var twt=document.getElementById("new_stream_twt").value;
+	var fd="name="+name+"&fb="+fb+"&twt="+twt+"";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("POST", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			var data=xhr.responseText;
+			var fed_b;
+			switch(data){
+				case "0":
+					fed_b="Oops."
+					document.getElementById("user_dash_main_feedback").style.color="#09F";
+				break;
+				case "1":
+					fed_b="Success."
+					document.getElementById("user_dash_main_feedback").style.color="#090";
+				break;
+				case "2":
+					fed_b="Specify at least one Source."
+					document.getElementById("user_dash_main_feedback").style.color="#F00";
+				break;
+			}
+			document.getElementById("user_dash_main_feedback").innerHTML=fed_b;
+			setTimeout(function (){
+					document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+					document.getElementById("new_stream_name").value="";
+					document.getElementById("new_stream_fb").value="";
+					document.getElementById("new_stream_twt").value="";
+			}, 2000);
+		}
+	}
+	xhr.send(fd);
+}
+
 function signUp(){
 	document.getElementById("start_signup_footer").innerHTML="Sending...";
 	var xhr;
@@ -363,4 +412,14 @@ function signIn(){
 		}
 	}
 	xhr.send(fd);
+}
+
+function toggleMenu(){
+	var disp_v=window.getComputedStyle(document.getElementById("user_flyout_menu"), null).getPropertyValue("display");
+	if(disp_v=="none"){
+		document.getElementById("user_flyout_menu").style.display="block";
+	}
+	else{
+		document.getElementById("user_flyout_menu").style.display="none";
+	}
 }

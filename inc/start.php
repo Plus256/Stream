@@ -1,7 +1,7 @@
 <section id="start">
     <div class="wrapper">
       <div id="start_header">
-        Your audience's gonna Love this - trust me.
+        You're gonna Love this.
       </div>
       <div id="start_main">
         <!--sign in sign up and some info-->

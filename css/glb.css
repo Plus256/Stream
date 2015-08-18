@@ -34,6 +34,7 @@ a:hover {
 	height:5em;
 	position:fixed;
 	width:100%;
+	z-index:2;
 	box-shadow:0 5px 5px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow:0 5px 5px rgba(0, 0, 0, 0.2);
 	-webkit-box-shadow:0 5px 5px rgba(0, 0, 0, 0.2);
@@ -285,6 +286,11 @@ svg#logo:hover .logo_shape{
 	float:right;
 	width:20%;
 	font-size:100%;
+	color:#000;
+}
+
+#send_msg_but:hover{
+	color:#766968;
 }
 
 #dialog_box_overlay{
@@ -311,7 +317,7 @@ div#msg_area {
 	/*a word (charcters without a space) stays on a single line by default - it does not wrap.
 	so having a very long one causes it to get off the text area*/
 	background:#FAFAFA;
-	color:#555;
+	color:#000;
 	transition:all 0.5s linear 0.1s;
 	-moz-transition:all 0.5s linear 0.1s;
 	-webkit-transition:all 0.5s linear 0.1s;
@@ -446,7 +452,7 @@ input[type="text"].msg_dialog_text_input{
 	font-size:100%;
 	background:#FAFAFA;
 	border:none;
-	color:#555;
+	color:#000;
 	line-height:2em;
 	margin-bottom:10px;
 }
@@ -1434,10 +1440,6 @@ color:#A1A1A1;
 	display:block;
 }
 
-#feed_container{
-	width:70%;
-}
-
 .dash_cover img{
 	width:100%;
 	height:auto;
@@ -1448,29 +1450,29 @@ color:#A1A1A1;
 	text-decoration:none;
 }
 
-#feed_container_category{
+/*#user_dash_category{
 	color:#FBAE17;
 	font-size:80%;
 }
 
-#feed_container_title{
+#user_dash_title{
 	color:#000;
 	padding-right:10px;
 }
 
-#feed_container_body{
+#user_dash_body{
 	font-size:80%;
 	color:#555555;
 	padding-right:10px;
 }
 
-#feed_container .read_more{
+#user_dash .read_more{
 	text-decoration:none;
 }
 
-#feed_container .read_more:hover{
+#user_dash .read_more:hover{
 	color:inherit;
-}
+}*/
 
 #feed_left_left_container{
 	width:49%;
@@ -1778,7 +1780,7 @@ display:block;
 	margin:1em auto 1em auto;
 }
 
-#hero_with{
+#hero_follow{
 	font-size:120%;
 	color:#766968;
 }
@@ -1874,7 +1876,7 @@ a#hero_start:hover{
 }
 
 #start_signin_header, #start_signup_header{
-	font-style:italic;
+	/*font-style:italic;*/
 }
 
 #start_signin_header{
@@ -1889,4 +1891,217 @@ a#hero_start:hover{
 	text-align:center;
 	color:#766968;
 	margin:5em 0;
+}
+
+#user_dash{
+	padding-top:5em;
+}
+
+#user_dash_nav{
+	float:left;
+	width:30%;
+	background:#F5F5F5;
+}
+
+#user_dash_nav ul{
+	margin:0;
+	list-style-type:none;
+	padding:0;
+}
+
+#user_dash_nav ul li a{
+	display:block;
+	padding:10px;
+	border-bottom:1px solid #E5E5E5;
+	color:#000;
+	line-height:2em;
+	text-decoration:none;
+}
+
+#user_dash_nav ul li:last-child a{
+	border-bottom:0;
+}
+
+#user_dash_nav ul li a:hover{
+	background:#EFEFEF;
+}
+
+#user_dash_main{
+	overflow:hidden;
+	background:#FFF;
+}
+
+#user_dash_main_cpanel{
+	padding:10px 10px 0 10px;
+	position:fixed;
+	right:3em;
+	/*background:rgba(118, 105, 104, 0.8);*/
+	/*width:100%;
+	I need to have this section fixed and width covering 100% of container and a faint bg
+	/*border-bottom:1px dotted #766968;*/
+}
+
+a.user_dash_main_cpanel_but{
+	width:3em;
+	height:3em;
+	line-height:3em;
+	text-align:center;
+	text-decoration:none;
+	color:#FFF;
+	font-weight:bold;
+	display:block;
+	margin-bottom:10px;
+	box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-o-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	border-radius:100%;
+	-moz-border-radius:100%;
+	-webkit-border-radius:100%;
+	-o-border-radius:100%;
+}
+
+a.user_dash_main_cpanel_but:hover{
+	box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
+	-o-box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+a#new_stream_button{
+	background:rgb(251, 174, 23);
+	background:rgba(251, 174, 23, 0.9);/* #5BBC2E #766968 #F00 #FBAE17*/
+}
+
+a#save_stream_button{
+	background:rgb(91, 188, 46);
+	background:rgba(91, 188, 46, 0.9);/* #5BBC2E #766968 #F00 #FBAE17*/
+}
+
+a#cancel_stream_button{
+	background:rgb(255, 0, 0);
+	background:rgba(255, 0, 0, 0.9);/* #5BBC2E #766968 #F00 #FBAE17*/
+}
+
+a#edit_stream_button{
+	background:rgb(118, 105, 104);
+	background:rgba(118, 105, 104, 0.9);/* #5BBC2E #766968 #F00 #FBAE17*/
+}
+
+#user_dash_main_content{
+	/*padding-top:4.2em;*/
+}
+
+#user_flyout{
+	float:right;
+	margin-left:10px;
+	color:#766968;
+	position:relative;
+}
+
+#user_flyout div{
+	float:right;
+}
+
+#user_flyout_dp{
+	cursor:pointer;
+	width:3em;
+	height:3em;
+	margin-left:10px;
+	position:relative;
+	top:1em;
+	box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	-o-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
+	border-radius:100%;
+	-moz-border-radius:100%;
+	-webkit-border-radius:100%;
+	-o-border-radius:100%;
+}
+
+#user_flyout_dp:hover{
+	box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
+	-o-box-shadow:0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+#user_flyout_dp img{
+	height:3em;
+	width:auto;
+	border-radius:100%;
+	-moz-border-radius:100%;
+	-webkit-border-radius:100%;
+	-o-border-radius:100%;
+}
+
+#user_flyout_name{
+	line-height:5em;
+}
+
+#user_flyout_menu{
+	display:none;
+	right:0;
+	position:absolute;
+	background:rgb(255, 255, 255);
+	background:rgba(255, 255, 255, 0.9);
+	box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
+	-o-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
+	z-index:20;
+	top:5em;
+	width:10em;
+	transition:all 1s ease 0.1s;
+	-moz-transition:all 1s ease 0.1s;
+	-webkit-transition:all 1s ease 0.1s;
+	-o-transition:all 1s ease 0.1s;
+}
+
+#user_flyout_menu ul{
+	margin:0;
+	list-style-type:none;
+	padding:0;
+}
+
+#user_flyout_menu ul li a{
+	display:block;
+	padding:10px;
+	font-size:80%;
+	color:#766968;
+	line-height:2em;
+	text-decoration:none;
+}
+
+#user_flyout_menu ul li a:hover{
+	background:rgb(251, 174, 23);
+	background:rgba(251, 174, 23, 0.75);
+}
+
+.new_stream_category{
+	background:#FAFAFA;
+	margin-bottom:10px;
+	padding:5px 10px;
+}
+
+.new_stream_category_header_header{
+	font-size:150%;
+	color:#766968;
+}
+
+.new_stream_category_header_main{
+	font-size:90%;
+	color:#555;
+}
+
+div.new_stream_category_main{
+	padding:1em 0;
+}
+
+#new_stream input[type="text"]{
+	border:1px solid #CCC;
+	background:#FFF;
+	font-size:120%;
+	margin:0;
 }

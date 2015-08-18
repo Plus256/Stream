@@ -6,8 +6,8 @@ require_once("inc/ban.php");
 <?php
 //logged in
 if(!empty($_SESSION['logged'])){
-  $user=$_SESSION['logged'];
-  require_once("inc/pst.php");
+  $user_id=$_SESSION['logged'];
+  require_once("inc/user.php");
 }
 //default
 else{
