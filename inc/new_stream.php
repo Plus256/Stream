@@ -1,5 +1,7 @@
 <div id="new_stream">
 
+  <div id="user_dash_main_feedback" class="new_stream_category">&nbsp;</div>
+
   <div class="new_stream_category">
     <div class="new_stream_category_header">
       <div class="new_stream_category_header_header">
@@ -66,8 +68,6 @@
     </div>
     <div class="spacer"></div>
   </div>
-
-  <div id="user_dash_main_feedback" class="new_stream_category">&nbsp;</div>
 
   <div class="spacer"></div>
 </div>

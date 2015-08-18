@@ -6,22 +6,47 @@ if(isset($_GET['save_stream'])){
     if(!empty($_POST['name'])){
       $name=cleanInput($_POST['name']);
     }
-    else{
-      $name="Stream";
+    else{//get last id from table
+      $q=mysqli_query($conn, "select id from stream order by id desc limit 1");
+      if(mysqli_num_rows($q)>0){
+        $r=mysqli_fetch_assoc($q);
+        $next_stream_id=$r['id']+1;
+        $name="stream".$next_stream_id;
+      }
+      else{//no stream in db
+        $name="stream1";
+      }
     }
     $user_id=$_SESSION['logged'];
     $q=mysqli_query($conn, "insert into stream (name, user) values ('$name', $user_id)");
     if($q){
-      mysql_query("select last_insert_id() into @stream");
+      $stream=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @stream");
       if(!empty($_POST['fb']) && !empty($_POST['twt'])){//if both sources are provided
         $fb=cleanInput($_POST['fb']);
         $twt=cleanInput($_POST['twt']);
-        $q=mysqli_query($conn, "insert into source (type, url) values (0, $fb), (1, $twt)");
+
+        $q=mysqli_query($conn, "insert into source (type, url) values (0, '$fb')");//insert fb first
         if($q){
-          mysql_query("select last_insert_id() into @source");
-          $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values (@source, @stream)");
-          if($q){
-            echo "1";
+          $fb_src=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @source");
+          $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values ($fb_src, $stream)");
+          if($q){//then twitter
+            $q=mysqli_query($conn, "insert into source (type, url) values (1, '$twt')");
+            if($q){
+              $twt_src=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @source");
+              $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values ($twt_src, $stream)");
+              if($q){
+                echo "1";
+              }
+              else{
+                echo mysqli_error($conn);
+              }
+            }
+            else{
+              echo "0";
+            }
+          }
+          else{
+            echo mysqli_error($conn);
           }
         }
         else{
@@ -30,9 +55,16 @@ if(isset($_GET['save_stream'])){
       }
       elseif(!empty($_POST['twt']) && empty($_POST['fb'])){//if twitter alone is provided
         $twt=cleanInput($_POST['twt']);
-        $q=mysqli_query($conn, "insert into source (type, url) values (1, $twt)");
+        $q=mysqli_query($conn, "insert into source (type, url) values (1, '$twt')");
         if($q){
-          echo "1";
+          $twt_src=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @source");
+          $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values ($twt_src, $stream)");
+          if($q){
+            echo "1";
+          }
+          else{
+            echo mysqli_error($conn);
+          }
         }
         else{
           echo "0";
@@ -40,9 +72,16 @@ if(isset($_GET['save_stream'])){
       }
       else{//if facebook alone is provided
         $fb=cleanInput($_POST['fb']);
-        $q=mysqli_query($conn, "insert into source (type, url) values (0, $fb)");
+        $q=mysqli_query($conn, "insert into source (type, url) values (0, '$fb')");
         if($q){
-          echo "1";
+          $fb_src=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @source"); BETTER THAN THIS <-
+          $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values ($fb_src, $stream)");
+          if($q){
+            echo "1";
+          }
+          else{
+            echo mysqli_error($conn);
+          }
         }
         else{
           echo "0";
@@ -86,7 +125,7 @@ if(isset($_GET['signup_req'])){
           	$msg.='It\'d be nice if you created a username, and also added a dp, as soon as you got in.';
           	$msg.='</div>';
 
-            $msg.='<a href="http://plus256.com/stream/verify.php?vkey='.$vkey.'" style="display:inline-block; text-decoration:none; padding:1em 5em; background:#FBAE17; color:#FFF; margin-top:3em; border:1px solid #F90;">';
+            $msg.='<a href="http://plus256.com/stream/verify.php?vkey='.$vkey.'" style="display:inline-block; text-decoration:none; padding:1em 5em; background:#FBAE17; color:#FFF; margin:3em 0; border:1px solid #F90;">';
           	$msg.='PROCEED';
           	$msg.='</a>';
             $msg.='</div>';
