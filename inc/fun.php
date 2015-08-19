@@ -265,7 +265,7 @@ if(isset($_GET['fb_page_feed'])){
 }
 
 function elapsedTime($t_stamp){
-	$occurred=strtotime($t_stamp)+(7*60*60);//add 7 hours to cater for Ugandan Time Zone
+	$occurred=strtotime($t_stamp)-(1*60*60);//subtract 1 hour to cater for Ugandan Time Zone
 	$diff=time()-$occurred;
 	if($diff<60){
 		$elapsed=$diff;

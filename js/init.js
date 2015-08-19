@@ -282,7 +282,9 @@ function addStream(){
 			document.getElementById("user_dash_main_content").innerHTML=data;
 			//cpanel_buttons
 			//we need to getin the SVG via ajax I guess
-			document.getElementById("user_dash_main_cpanel").innerHTML='<a href="#" class="user_dash_main_cpanel_but" id="save_stream_button" onclick="saveStream(); return false;"><?php echo file_get_contents("gra/ic_save.svg"); ?></a><a href="#" class="user_dash_main_cpanel_but" id="cancel_stream_button" onclick="fetchStream(); return false"><?php //echo file_get_contents("gra/ic_cancel.svg"); ?></a>';
+			document.getElementById("user_dash_main_cpanel").innerHTML='';
+			getSVGIcon('ic_save', 'save_stream_button', saveStream);
+			getSVGIcon('ic_cancel', 'cancel_stream_button', fetchStream);
 		}
 	}
 	xhr.send(null);
@@ -312,24 +314,29 @@ function saveStream(){
 				case "0":
 					fed_b="Oops."
 					document.getElementById("user_dash_main_feedback").style.color="#09F";
+					document.getElementById("user_dash_main_feedback").innerHTML=fed_b;
+					setTimeout(function (){
+							document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+							document.getElementById("new_stream_name").value="";
+							document.getElementById("new_stream_fb").value="";
+							document.getElementById("new_stream_twt").value="";
+					}, 2000);
 				break;
 				case "1":
-					fed_b="Success."
-					document.getElementById("user_dash_main_feedback").style.color="#090";
 					fetchStream();
 				break;
 				case "2":
 					fed_b="Specify at least one Source."
 					document.getElementById("user_dash_main_feedback").style.color="#F00";
+					document.getElementById("user_dash_main_feedback").innerHTML=fed_b;
+					setTimeout(function (){
+							document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+							document.getElementById("new_stream_name").value="";
+							document.getElementById("new_stream_fb").value="";
+							document.getElementById("new_stream_twt").value="";
+					}, 2000);
 				break;
 			}
-			document.getElementById("user_dash_main_feedback").innerHTML=fed_b;
-			setTimeout(function (){
-					document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
-					document.getElementById("new_stream_name").value="";
-					document.getElementById("new_stream_fb").value="";
-					document.getElementById("new_stream_twt").value="";
-			}, 2000);
 		}
 	}
 	xhr.send(fd);
@@ -350,7 +357,8 @@ function fetchStream(){
 		if(xhr.readyState==4 && xhr.status==200){
 			document.getElementById("user_dash_main_content").innerHTML='';
 			//cpanel_buttons
-			document.getElementById("user_dash_main_cpanel").innerHTML='<a href="#" class="user_dash_main_cpanel_but" id="new_stream_button" onclick="addStream(); return false;"><?php echo file_get_contents("gra/ic_add.svg"); ?></a>';
+			document.getElementById("user_dash_main_cpanel").innerHTML='';
+			getSVGIcon('ic_add', 'new_stream_button', addStream);
 			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
 			var data=xhr.responseText;
 			//document.getElementById("user_dash_main_content").innerHTML=data;
@@ -521,4 +529,26 @@ function toggleMenu(){
 	else{
 		document.getElementById("user_flyout_menu").style.display="none";
 	}
+}
+
+function getSVGIcon(type, id, callback){
+	var svg;
+	var xhr=new XMLHttpRequest;
+	xhr.open('GET','gra/'+type+'.svg',true);
+	xhr.onreadystatechange=function(){
+	  if (xhr.readyState!=4) return;
+	  svg=xhr.responseXML.documentElement;
+	  svg=document.importNode(svg,true); // surprisingly optional in these browsers
+		//<a href="#" class="user_dash_main_cpanel_but" id="new_stream_button" onclick="addStream(); return false;"><?php echo file_get_contents("gra/ic_add.svg"); ?></a>;
+
+		var cpanel_but=_("a");
+		cpanel_but.href="#";
+		cpanel_but.setAttribute("class", "user_dash_main_cpanel_but");
+		cpanel_but.setAttribute("id", ""+id+"");
+		cpanel_but.addEventListener("click", callback, false);
+		cpanel_but.appendChild(svg);
+
+	  document.getElementById("user_dash_main_cpanel").appendChild(cpanel_but);
+	};
+	xhr.send();
 }

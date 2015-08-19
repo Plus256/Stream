@@ -2118,7 +2118,6 @@ div.new_stream_category_main{
 }
 
 table.stream {
-	color:#09F;
 	font-size:85%;
 	width:100%;
 	max-width:100%;
@@ -2142,7 +2141,7 @@ table.stream tr {
 }
 
 table.stream tr:first-child {
-	border-top:1px solid #03F;
+	border-top:1px solid #555;
 }
 
 .cls_tot {
@@ -2163,15 +2162,13 @@ table.stream th {
 }
 
 table.stream thead {
-	background:#09F;
+	background:#766968;
 	color:#FFF;
-	border:1px solid #03F;
-	border-bottom:none;
+	border:1px solid #555;
 }
 
 table.stream tr:nth-child(even) {
   background:#FAFAFA;
-	color:#000;
 }
 
 table.stream tr.close_tot {
