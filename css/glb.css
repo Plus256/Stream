@@ -1752,11 +1752,15 @@ color:#A1A1A1;
 .auth_img{
 	float:left;
 	padding:5px;
+	width:3em;
+	height:3em;
 
 }
 
 .auth_img img{
 display:block;
+width:100%;
+height:auto;
 
 }
 
