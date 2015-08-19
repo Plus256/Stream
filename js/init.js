@@ -263,6 +263,31 @@ function _(tag_name){
 	return document.createElement(tag_name);
 }
 
+function addStream(){
+	document.getElementById("user_dash_main_feedback").innerHTML="Sending Request...";
+	var xhr;
+	var url="inc/new_stream.php";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("GET", url);
+	xhr.onreadystatechange=function(){
+		document.getElementById("user_dash_main_content").innerHTML='';
+		if(xhr.readyState==4 && xhr.status==200){
+			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+			var data=xhr.responseText;
+			document.getElementById("user_dash_main_content").innerHTML=data;
+			//cpanel_buttons
+			//we need to getin the SVG via ajax I guess
+			document.getElementById("user_dash_main_cpanel").innerHTML='<a href="#" class="user_dash_main_cpanel_but" id="save_stream_button" onclick="saveStream(); return false;"><?php echo file_get_contents("gra/ic_save.svg"); ?></a><a href="#" class="user_dash_main_cpanel_but" id="cancel_stream_button" onclick="fetchStream(); return false"><?php //echo file_get_contents("gra/ic_cancel.svg"); ?></a>';
+		}
+	}
+	xhr.send(null);
+}
+
 function saveStream(){
 	document.getElementById("user_dash_main_feedback").innerHTML="Sending...";
 	var xhr;
@@ -291,6 +316,7 @@ function saveStream(){
 				case "1":
 					fed_b="Success."
 					document.getElementById("user_dash_main_feedback").style.color="#090";
+					fetchStream();
 				break;
 				case "2":
 					fed_b="Specify at least one Source."
@@ -307,6 +333,79 @@ function saveStream(){
 		}
 	}
 	xhr.send(fd);
+}
+
+function fetchStream(){
+	document.getElementById("user_dash_main_feedback").innerHTML="Sending Request...";
+	var xhr;
+	var url="inc/fun.php?fetch_stream";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("GET", url);
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			document.getElementById("user_dash_main_content").innerHTML='';
+			//cpanel_buttons
+			document.getElementById("user_dash_main_cpanel").innerHTML='<a href="#" class="user_dash_main_cpanel_but" id="new_stream_button" onclick="addStream(); return false;"><?php echo file_get_contents("gra/ic_add.svg"); ?></a>';
+			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+			var data=xhr.responseText;
+			//document.getElementById("user_dash_main_content").innerHTML=data;
+			data=JSON.parse(data);
+			var tbl=document.createElement("table");
+			var tblhead=document.createElement("thead");
+			var tblbody=document.createElement("tbody");
+			tbl.setAttribute("class", "stream");
+			for(var k=0; k<3; k++){
+				var col_label=document.createElement("th");
+				if(k==0){
+					var celltext=document.createTextNode("Name");
+					col_label.appendChild(celltext);
+					tblhead.appendChild(col_label);
+				}
+				if(k==1){
+					var celltext=document.createTextNode("Status");
+					col_label.appendChild(celltext);
+					tblhead.appendChild(col_label);
+				}
+				if(k==2){
+					var celltext=document.createTextNode("Created");
+					col_label.appendChild(celltext);
+					tblhead.appendChild(col_label);
+				}
+			}
+			for(var i in data){
+				var id=data[i].id;
+				var row=document.createElement("tr");
+				for(var j=0; j<3; j++){
+					var cell=document.createElement("td");
+					if(j==0){
+						var celltext=document.createTextNode(data[i].name);
+						cell.appendChild(celltext);
+						row.appendChild(cell);
+					}
+					if(j==1){
+						var qty=document.createTextNode(data[i].status);
+						cell.appendChild(qty);
+						row.appendChild(cell);
+					}
+					if(j==2){
+						var celltext=document.createTextNode(data[i].created);
+						cell.appendChild(celltext);
+						row.appendChild(cell);
+					}
+				}
+				tblbody.appendChild(row);
+			}
+			tbl.appendChild(tblhead);
+			tbl.appendChild(tblbody);
+			document.getElementById("user_dash_main_content").appendChild(tbl);
+		}
+	}
+	xhr.send(null);
 }
 
 function signUp(){

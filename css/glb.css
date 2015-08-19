@@ -1993,7 +1993,8 @@ a#edit_stream_button{
 }
 
 #user_dash_main_content{
-	/*padding-top:4.2em;*/
+	padding:4.2em 10px 10px 10px;
+	min-height:50em;
 }
 
 #user_flyout{
@@ -2108,4 +2109,76 @@ div.new_stream_category_main{
 	background:#FFF;
 	font-size:120%;
 	margin:0;
+}
+
+.user_dash_main_feedback{
+	/*I need width 100% and background*/
+	position:fixed;
+	padding:10px;
+}
+
+table.stream {
+	color:#09F;
+	font-size:85%;
+	width:100%;
+	max-width:100%;
+	border-spacing:0;
+	border-collapse:collapse;
+}
+
+table.stream img {
+	width:25px;
+	height:25px;
+}
+
+table.stream a {
+	color:#F06;
+	display:block;
+}
+
+table.stream tr {
+	cursor:pointer;
+	border:1px solid #E1E1E1;
+}
+
+table.stream tr:first-child {
+	border-top:1px solid #03F;
+}
+
+.cls_tot {
+	text-decoration:underline;
+}
+
+table.stream tr:hover {
+	background:#F5F5F5;
+}
+
+table.stream td {
+	padding:5px 10px 5px 10px;
+}
+
+table.stream th {
+	text-align:left;
+	padding:10px;
+}
+
+table.stream thead {
+	background:#09F;
+	color:#FFF;
+	border:1px solid #03F;
+	border-bottom:none;
+}
+
+table.stream tr:nth-child(even) {
+  background:#FAFAFA;
+	color:#000;
+}
+
+table.stream tr.close_tot {
+	color:#F06;
+	cursor:default;
+}
+
+table.stream tr:nth-child(even):hover {
+    background:#F5F5F5;
 }

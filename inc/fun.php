@@ -352,4 +352,25 @@ function sendMsg($to,$frm, $sbj, $msg){
 	}
 }
 
+if(isset($_GET['fetch_stream'])){
+  $user_id=$_SESSION['logged'];
+  $data=array();
+	$q=mysqli_query($conn, "select * from stream where user=$user_id");
+  if($q){
+    $qt=mysqli_query($conn, "select id from stream");//total records
+  	$tot_r=mysqli_num_rows($qt);
+  	while($r=mysqli_fetch_assoc($q)){
+  		$id=$r['id']; $name=$r['name']; $status=$r['status']; $created=$r['created'];
+  		$created=elapsedTime($created);
+      switch($status){
+        case 0: $status="Draft"; break;
+        case 1: $status="Live"; break;
+      }
+  		$rec=array("id"=>$id, "name"=>$name, "status"=>$status, "created"=>$created, "tot_r"=>$tot_r);
+  		array_push($data, $rec);
+  	}
+  	echo json_encode($data);
+  }
+}
+
 ?>
