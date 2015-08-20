@@ -373,4 +373,36 @@ if(isset($_GET['fetch_stream'])){
   }
 }
 
+if(isset($_GET['read_stream']) && isset($_GET['id'])){
+  $stream_id=$_GET['id'];
+  $user_id=$_SESSION['logged'];
+  $data=array();
+  $sources=array();
+	$q=mysqli_query($conn, "select * from stream where id=$stream_id");
+  if($q){
+    $r=mysqli_fetch_assoc($q);
+    $id=$r['id']; $name=$r['name']; $status=$r['status']; $created=$r['created'];
+    $created=elapsedTime($created);
+    switch($status){
+      case 0: $status="Draft"; break;
+      case 1: $status="Live"; break;
+    }
+    $qs=mysqli_query($conn, "select src.id, src.type, src.url from source as src join sourcetostream as sts join stream as s on sts.stream=s.id and sts.source=src.id where s.id=$stream_id");
+    if($qs){
+      while($rs=mysqli_fetch_assoc($qs)){
+        $src_id=$rs['id'];$src_type=$rs['type'];$src_url=$rs['url'];
+        switch($src_type){
+          case 0: $src_type="Facebook"; break;
+          case 1: $src_type="Twitter"; break;
+        }
+        $src_rec=array("id"=>$src_id, "type"=>$src_type, "url"=>$src_url);
+        array_push($sources, $src_rec);
+      }
+    }
+    $rec=array("id"=>$id, "name"=>$name, "status"=>$status, "created"=>$created, "sources"=>$sources);
+    array_push($data, $rec);
+  	echo json_encode($data);
+  }
+}
+
 ?>

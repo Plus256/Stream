@@ -388,6 +388,9 @@ function fetchStream(){
 			for(var i in data){
 				var id=data[i].id;
 				var row=document.createElement("tr");
+				row.setAttribute("id", ""+id+"");
+				//row.addEventListener("click", readStream(id), false); <- it's missbehaving
+				row.setAttribute("onclick", "readStream(this.id);");
 				for(var j=0; j<3; j++){
 					var cell=document.createElement("td");
 					if(j==0){
@@ -414,6 +417,36 @@ function fetchStream(){
 		}
 	}
 	xhr.send(null);
+}
+
+function readStream(id){
+	document.getElementById("user_dash_main_feedback").innerHTML="Sending Request...";
+	var xhr;
+	var url="inc/fun.php?read_stream&id="+id+"";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("GET", url);
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			document.getElementById("user_dash_main_content").innerHTML='';
+			//cpanel_buttons
+			document.getElementById("user_dash_main_cpanel").innerHTML='';
+			getSVGIcon('ic_edit', 'edit_stream_button', editStream);
+			getSVGIcon('ic_add', 'new_stream_button', addStream);
+			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+			var data=xhr.responseText;
+			document.getElementById("user_dash_main_content").innerHTML=data;
+		}
+	}
+	xhr.send(null);
+}
+
+function editStream(){
+	//starts here
 }
 
 function signUp(){
