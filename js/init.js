@@ -263,7 +263,7 @@ function _(tag_name){
 	return document.createElement(tag_name);
 }
 
-function addStream(){
+function addStream(event){
 	document.getElementById("user_dash_main_feedback").innerHTML="Sending Request...";
 	var xhr;
 	var url="inc/new_stream.php";
@@ -288,9 +288,10 @@ function addStream(){
 		}
 	}
 	xhr.send(null);
+	event.preventDefault();
 }
 
-function saveStream(){
+function saveStream(event){
 	document.getElementById("user_dash_main_feedback").innerHTML="Sending...";
 	var xhr;
 	var url="inc/fun.php?save_stream";
@@ -340,6 +341,7 @@ function saveStream(){
 		}
 	}
 	xhr.send(fd);
+	event.preventDefault();
 }
 
 function fetchStream(){
@@ -500,7 +502,7 @@ function readStream(id){
 				/////////////////////////////////////
 				var stream_read_footer=_("div");
 				stream_read_footer.setAttribute("class", "stream_read_footer");
-
+				/////////////////////////////////////
 				stream_read.appendChild(stream_read_header);
 				stream_read.appendChild(stream_read_main);
 				stream_read.appendChild(stream_read_footer);
@@ -642,7 +644,7 @@ function getSVGIcon(type, id, callback){
 		//<a href="#" class="user_dash_main_cpanel_but" id="new_stream_button" onclick="addStream(); return false;"><?php echo file_get_contents("gra/ic_add.svg"); ?></a>;
 
 		var cpanel_but=_("a");
-		cpanel_but.href="#";
+		//cpanel_but.href="#";
 		cpanel_but.setAttribute("class", "user_dash_main_cpanel_but");
 		cpanel_but.setAttribute("id", ""+id+"");
 		cpanel_but.addEventListener("click", callback, false);

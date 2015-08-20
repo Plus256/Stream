@@ -19,12 +19,12 @@
         <?php
         if(mysqli_num_rows($q)>0){//button to create more streams
           ?>
-          <a href="#" class="user_dash_main_cpanel_but" id="new_stream_button" onclick="addStream(); return false;"><?php echo file_get_contents("gra/ic_add.svg"); ?></a>
+          <a class="user_dash_main_cpanel_but" id="new_stream_button" onclick="addStream(); return false;"><?php echo file_get_contents("gra/ic_add.svg"); ?></a>
           <?php
         }
         else{//button to save first stream
           ?>
-          <a href="#" class="user_dash_main_cpanel_but" id="save_stream_button" onclick="saveStream(); return false;"><?php echo file_get_contents("gra/ic_save.svg"); ?></a>
+          <a class="user_dash_main_cpanel_but" id="save_stream_button" onclick="saveStream(); return false;"><?php echo file_get_contents("gra/ic_save.svg"); ?></a>
           <?php
         }
         ?>
