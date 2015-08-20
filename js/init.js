@@ -439,7 +439,74 @@ function readStream(id){
 			getSVGIcon('ic_add', 'new_stream_button', addStream);
 			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
 			var data=xhr.responseText;
-			document.getElementById("user_dash_main_content").innerHTML=data;
+			//document.getElementById("user_dash_main_content").innerHTML=data;
+			data=JSON.parse(data);
+
+			for(var i in data){
+				var stream_read=_("div");
+				stream_read.setAttribute("class", "stream_read");
+				var stream_read_spacer=_("div");
+				stream_read_spacer.setAttribute("class", "spacer");
+				////////////////////////////////////
+				var stream_read_header=_("div");
+				stream_read_header.setAttribute("class", "stream_read_header");
+				var stream_read_header_spacer=_("div");
+				stream_read_header_spacer.setAttribute("class", "spacer");
+
+				var stream_read_header_name=_("div");
+				stream_read_header_name.setAttribute("class", "stream_read_header_name");
+				stream_read_header_name.innerHTML=data[i].name;
+				stream_read_header.appendChild(stream_read_header_name);
+
+				var stream_read_header_status=_("div");
+				stream_read_header_status.setAttribute("class", "stream_read_header_status");
+				stream_read_header_status.innerHTML=data[i].status;
+				stream_read_header.appendChild(stream_read_header_status);
+
+				var stream_read_header_created=_("div");
+				stream_read_header_created.setAttribute("class", "stream_read_header_created");
+				stream_read_header_created.innerHTML=data[i].created;
+				stream_read_header.appendChild(stream_read_header_created);
+				stream_read_header.appendChild(stream_read_header_spacer);
+				/////////////////////////////////////
+				var stream_read_main=_("div");
+				stream_read_main.setAttribute("class", "stream_read_main");
+				var stream_read_main_spacer=_("div");
+				stream_read_main_spacer.setAttribute("class", "spacer");
+				//we need to loop through the sources array and determine which source is which, and where it should go
+				for(var j=0; j<(data[i].sources.length); j++){
+					if(data[i].sources[j].type=="Facebook"){
+						var stream_read_main_fb=_("div");
+						stream_read_main_fb.setAttribute("class", "stream_read_main_fb");
+						var stream_read_main_fb_icon=_("div");
+						stream_read_main_fb_icon.setAttribute("class", "stream_read_main_fb_icon");
+						stream_read_main_fb_icon.innerHTML='<img src="gra/facebook.png" style="width:5em; height:auto;" />';
+						stream_read_main_fb.appendChild(stream_read_main_fb_icon);
+						stream_read_main_fb.innerHTML+="/"+data[i].sources[j].url;
+						stream_read_main.appendChild(stream_read_main_fb);
+					}
+					else if(data[i].sources[j].type=="Twitter"){
+						var stream_read_main_twt=_("div");
+						stream_read_main_twt.setAttribute("class", "stream_read_main_twt");
+						var stream_read_main_twt_icon=_("div");
+						stream_read_main_twt_icon.setAttribute("class", "stream_read_main_twt_icon");
+						stream_read_main_twt_icon.innerHTML='<img src="gra/twitter.png" style="width:5em; height:auto;" />';
+						stream_read_main_twt.appendChild(stream_read_main_twt_icon);
+						stream_read_main_twt.innerHTML+="#"+data[i].sources[j].url;
+						stream_read_main.appendChild(stream_read_main_twt);
+					}
+				}
+				stream_read_main.appendChild(stream_read_main_spacer);
+				/////////////////////////////////////
+				var stream_read_footer=_("div");
+				stream_read_footer.setAttribute("class", "stream_read_footer");
+
+				stream_read.appendChild(stream_read_header);
+				stream_read.appendChild(stream_read_main);
+				stream_read.appendChild(stream_read_footer);
+				stream_read.appendChild(stream_read_spacer);
+				document.getElementById("user_dash_main_content").appendChild(stream_read);
+			}
 		}
 	}
 	xhr.send(null);

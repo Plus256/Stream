@@ -2183,3 +2183,30 @@ table.stream tr.close_tot {
 table.stream tr:nth-child(even):hover {
     background:#F5F5F5;
 }
+
+.stream_read{
+	background:#FAFAFA;
+}
+
+.stream_read_header, .stream_read_main, .stream_read_footer{
+	padding:10px 5px;
+}
+
+.stream_read_header{
+	border-bottom:1px solid #EFEFEF;
+}
+
+.stream_read_header_name{
+	font-size:150%;
+	color:#766968;
+	float:left;
+}
+
+.stream_read_header_status{
+	float:right;
+	margin-left:2em;
+}
+
+.stream_read_header_created{
+	float:right;
+}
