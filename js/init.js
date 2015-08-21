@@ -645,21 +645,12 @@ function toggleMenu(){
 }
 
 function toggleNav(){
-	//visibility
-	var visibility=window.getComputedStyle(document.getElementById("mobile_menu_container"), null).getPropertyValue("visibility");
-	if(visibility=="hidden"){
-		document.getElementById("mobile_menu_container").style.visibility="visible";
+	var disp_v=window.getComputedStyle(document.getElementById("mobile_menu_container"), null).getPropertyValue("display");
+	if(disp_v=="none"){
+		document.getElementById("mobile_menu_container").style.display="block";
 	}
 	else{
-		document.getElementById("mobile_menu_container").style.visibility="hidden";
-	}
-	//position right
-	var right=window.getComputedStyle(document.getElementById("mobile_menu_container"), null).getPropertyValue("right");
-	if(right!="0"){
-		document.getElementById("mobile_menu_container").style.right="0";
-	}
-	else{
-		document.getElementById("mobile_menu_container").style.right="-12em";
+		document.getElementById("mobile_menu_container").style.display="none";
 	}
 }
 

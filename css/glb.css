@@ -124,10 +124,10 @@ svg#logo:hover .logo_shape{
 	-moz-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
 	-webkit-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
 	-o-box-shadow:0 0 5px rgba(0, 0, 0, 0.1);
-	visibility:hidden;
+	display:none;
+	right:10px;
 	z-index:20;
 	top:5em;
-	right:-12em;
 	width:10em;
 	transition:all 1s ease 0.1s;
 	-moz-transition:all 1s ease 0.1s;
