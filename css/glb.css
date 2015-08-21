@@ -135,10 +135,10 @@ svg#logo:hover .logo_shape{
 	-o-transition:all 1s ease 0.1s;
 }
 
-#mobile_menu:hover div#mobile_menu_container, #mobile_menu:focus div#mobile_menu_container, #mobile_menu:active div#mobile_menu_container{
+/*#mobile_menu:hover div#mobile_menu_container, #mobile_menu:focus div#mobile_menu_container, #mobile_menu:active div#mobile_menu_container{
 	visibility:visible;
 	right:0;
-}
+}*/
 
 /*#mobile_menu:hover div#mobile_menu_icon .mobile_menu_icon_stripe{
 	background:#000;

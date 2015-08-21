@@ -10,6 +10,9 @@ $(document).ready(function(){
 		if(document.getElementById("user_flyout")){
 			document.getElementById("user_flyout_dp").addEventListener("click", toggleMenu, false);
 		}
+		if(document.getElementById("mobile_menu")){
+			document.getElementById("mobile_menu").addEventListener("click", toggleNav, false);
+		}
 });
 
 var buffer=new Buffer();
@@ -638,6 +641,25 @@ function toggleMenu(){
 	}
 	else{
 		document.getElementById("user_flyout_menu").style.display="none";
+	}
+}
+
+function toggleNav(){
+	//visibility
+	var visibility=window.getComputedStyle(document.getElementById("mobile_menu_container"), null).getPropertyValue("visibility");
+	if(visibility=="hidden"){
+		document.getElementById("mobile_menu_container").style.visibility="visible";
+	}
+	else{
+		document.getElementById("mobile_menu_container").style.visibility="hidden";
+	}
+	//position right
+	var right=window.getComputedStyle(document.getElementById("mobile_menu_container"), null).getPropertyValue("right");
+	if(right!="0"){
+		document.getElementById("mobile_menu_container").style.right="0";
+	}
+	else{
+		document.getElementById("mobile_menu_container").style.right="-12em";
 	}
 }
 
