@@ -135,7 +135,7 @@ svg#logo:hover .logo_shape{
 	-o-transition:all 1s ease 0.1s;
 }
 
-#mobile_menu:hover div#mobile_menu_container{
+#mobile_menu:hover div#mobile_menu_container, #mobile_menu:focus div#mobile_menu_container, #mobile_menu:active div#mobile_menu_container{
 	visibility:visible;
 	right:0;
 }
@@ -1998,7 +1998,7 @@ a#edit_stream_button{
 }
 
 #user_dash_main_content{
-	padding:4.2em 10px 10px 10px;
+	padding:4.2em 10px 0 10px;
 	min-height:50em;
 }
 
@@ -2109,7 +2109,11 @@ div.new_stream_category_main{
 	padding:1em 0;
 }
 
-#new_stream input[type="text"]{
+.stream_form{
+	/*margin-bottom:10px;*/
+}
+
+.stream_form input[type="text"]{
 	border:1px solid #CCC;
 	background:#FFF;
 	font-size:120%;

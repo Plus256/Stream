@@ -270,4 +270,12 @@
 	#user_flyout_menu{
 		right:10px;
 	}
+
+	#hero_engage{
+		font-size:300%;
+	}
+
+	.stream_form input[type="text"]{
+		width:100%;
+	}
 }

@@ -263,7 +263,7 @@ function _(tag_name){
 	return document.createElement(tag_name);
 }
 
-function addStream(event){
+function addStream(){
 	document.getElementById("user_dash_main_feedback").innerHTML="Sending Request...";
 	var xhr;
 	var url="inc/new_stream.php";
@@ -288,10 +288,9 @@ function addStream(event){
 		}
 	}
 	xhr.send(null);
-	event.preventDefault();
 }
 
-function saveStream(event){
+function saveStream(){
 	document.getElementById("user_dash_main_feedback").innerHTML="Sending...";
 	var xhr;
 	var url="inc/fun.php?save_stream";
@@ -341,7 +340,6 @@ function saveStream(event){
 		}
 	}
 	xhr.send(fd);
-	event.preventDefault();
 }
 
 function fetchStream(){
@@ -514,8 +512,18 @@ function readStream(id){
 	xhr.send(null);
 }
 
-function editStream(){
-	//starts here
+function editStream(id){
+	var xhr=new XMLHttpRequest;
+	xhr.open('GET','inc/edit_stream.php?edit_stream&id='+id+'',true);
+	xhr.onreadystatechange=function(){
+	  if (xhr.readyState!=4) return;
+		document.getElementById("user_dash_main_cpanel").innerHTML='';
+		getSVGIcon('ic_save', 'save_stream_button', saveStream);
+		getSVGIcon('ic_cancel', 'cancel_stream_button', readStream);
+		var data=xhr.responseText;
+		document.getElementById("user_dash_main_content").innerHTML=data;
+	};
+	xhr.send();
 }
 
 function signUp(){
