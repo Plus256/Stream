@@ -1,6 +1,6 @@
 <?php
-require_once("cnf.php");
-if(isset($_GET['read_stream']) && isset($_GET['id'])){
+/*require_once("cnf.php");
+if(isset($_GET['edit_stream']) && isset($_GET['id'])){
   $stream_id=$_GET['id'];
   $user_id=$_SESSION['logged'];
   $data=array();
@@ -30,7 +30,7 @@ if(isset($_GET['read_stream']) && isset($_GET['id'])){
     array_push($data, $rec);
   	echo json_encode($data);
   }
-}
+}*/
 ?>
 <div class="stream_form">
 

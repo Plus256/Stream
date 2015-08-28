@@ -1817,6 +1817,11 @@ a#hero_start:hover{
 	color:#766968;
 }
 
+#trend_main{
+	position:relative;
+	z-index:2;
+}
+
 #start{
 	background:#F5F5F5;
 	text-align:center;
@@ -1851,6 +1856,8 @@ a#hero_start:hover{
 	-moz-transition:none;
 	-webkit-transition:none;
 	-o-transition:none;
+  border-radius:0;
+	-webkit-border-radius:0;
 	padding:12px 2em;
 	vertical-align:middle;
 	font-size:100%;

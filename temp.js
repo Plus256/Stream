@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$("#signup_button").click(signUp);
 	$("#signin_button").click(signIn);
 	if(document.getElementById("trend_main")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
-			getFeed("worshipextreme", "mashable", "trend_main", 10);//pass container as argument
+			getFeed("ferguson", "mashable", "trend_main", 10);//pass container as argument
 		}
 		if(document.getElementById("user_flyout")){
 			document.getElementById("user_flyout_dp").addEventListener("click", toggleMenu, false);
@@ -730,7 +730,7 @@ function getSVGIcon(type, id, callback){
 }
 
 function getFeed(twt, fb, cont, limit){
-	getFacebookPageFeeds(fb, cont, limit);
 	getTwitterFeeds(twt, cont, limit);
+	getFacebookPageFeeds(fb, cont, limit);
 	//setInterval(getFeed, 1000);
 }

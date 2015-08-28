@@ -94,6 +94,99 @@ if(isset($_GET['save_stream'])){
 	}
 }
 
+if(isset($_GET['update_stream']) && isset($_GET['id'])){
+  if(!empty($_POST['fb']) || !empty($_POST['twt'])){//at least one source
+    if(!empty($_POST['name'])){
+      $name=cleanInput($_POST['name']);
+    }
+    else{//get last id from table
+      $q=mysqli_query($conn, "select id from stream order by id desc limit 1");
+      if(mysqli_num_rows($q)>0){
+        $r=mysqli_fetch_assoc($q);
+        $next_stream_id=$r['id']+1;
+        $name="stream".$next_stream_id;
+      }
+      else{//no stream in db
+        $name="stream1";
+      }
+    }
+    $user_id=$_SESSION['logged'];
+    $q=mysqli_query($conn, "insert into stream (name, user) values ('$name', $user_id)");
+    if($q){
+      $stream=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @stream");
+      if(!empty($_POST['fb']) && !empty($_POST['twt'])){//if both sources are provided
+        $fb=cleanInput($_POST['fb']);
+        $twt=cleanInput($_POST['twt']);
+
+        $q=mysqli_query($conn, "insert into source (type, url) values (0, '$fb')");//insert fb first
+        if($q){
+          $fb_src=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @source");
+          $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values ($fb_src, $stream)");
+          if($q){//then twitter
+            $q=mysqli_query($conn, "insert into source (type, url) values (1, '$twt')");
+            if($q){
+              $twt_src=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @source");
+              $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values ($twt_src, $stream)");
+              if($q){
+                echo "1";
+              }
+              else{
+                echo mysqli_error($conn);
+              }
+            }
+            else{
+              echo "0";
+            }
+          }
+          else{
+            echo mysqli_error($conn);
+          }
+        }
+        else{
+          echo "0";
+        }
+      }
+      elseif(!empty($_POST['twt']) && empty($_POST['fb'])){//if twitter alone is provided
+        $twt=cleanInput($_POST['twt']);
+        $q=mysqli_query($conn, "insert into source (type, url) values (1, '$twt')");
+        if($q){
+          $twt_src=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @source");
+          $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values ($twt_src, $stream)");
+          if($q){
+            echo "1";
+          }
+          else{
+            echo mysqli_error($conn);
+          }
+        }
+        else{
+          echo "0";
+        }
+      }
+      else{//if facebook alone is provided
+        $fb=cleanInput($_POST['fb']);
+        $q=mysqli_query($conn, "insert into source (type, url) values (0, '$fb')");
+        if($q){
+          $fb_src=mysqli_insert_id($conn);//mysql_query("select last_insert_id() into @source"); BETTER THAN THIS <-
+          $q=mysqli_query($conn, "insert into sourcetostream (source, stream) values ($fb_src, $stream)");
+          if($q){
+            echo "1";
+          }
+          else{
+            echo mysqli_error($conn);
+          }
+        }
+        else{
+          echo "0";
+        }
+      }
+    }
+	}
+	else{
+		echo "2";
+	}
+}
+
 if(isset($_GET['signup_req'])){
   if(!empty($_POST['email']) && !empty($_POST['password'])){
 		$mail_check=spamCheck($_POST['email']);
@@ -219,16 +312,23 @@ function cleanInput($data){
 }
 
 if(isset($_GET['fb_page_feed'])){
-  $fb_page_id = "335422937918";
+  if(isset($_GET['fb_src']) && isset($_GET['limit'])){
+    $fb_src=$_GET['fb_src'];
+    $limit=$_GET['limit']; echo $limit;
+  }else{
+    $fb_src="335422937918";
+    $limit=10;
+  }
+  //$fb_page_id = "335422937918";
   $access_token = "482219788583361|hKl9uoyyU6FwifKMLd-mWLsGR1Y";
   $fields = "id,message,full_picture,link,name,description,type,icon,created_time,from,object_id";//use full_picture instead of picture
-  $limit = 5;
+  //$limit = $limit;
 
 
   //$profile_photo_src = "https://graph.facebook.com/".$fb_page_id."/picture?type=square";
 
 
-  $json_link = "https://graph.facebook.com/v2.4/".$fb_page_id."/feed?access_token=".$access_token."&fields={$fields}&limit={$limit}";
+  $json_link = "https://graph.facebook.com/v2.4/".$fb_src."/feed?access_token=".$access_token."&fields={$fields}&limit={$limit}";
 
   try{
 
