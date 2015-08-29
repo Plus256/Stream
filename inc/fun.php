@@ -314,16 +314,13 @@ function cleanInput($data){
 if(isset($_GET['fb_page_feed'])){
   if(isset($_GET['fb_src']) && isset($_GET['limit'])){
     $fb_src=$_GET['fb_src'];
-    $limit=$_GET['limit']; echo $limit;
+    $limit=$_GET['limit'];
   }else{
     $fb_src="335422937918";
     $limit=10;
   }
-  //$fb_page_id = "335422937918";
   $access_token = "482219788583361|hKl9uoyyU6FwifKMLd-mWLsGR1Y";
   $fields = "id,message,full_picture,link,name,description,type,icon,created_time,from,object_id";//use full_picture instead of picture
-  //$limit = $limit;
-
 
   //$profile_photo_src = "https://graph.facebook.com/".$fb_page_id."/picture?type=square";
 
@@ -331,8 +328,6 @@ if(isset($_GET['fb_page_feed'])){
   $json_link = "https://graph.facebook.com/v2.4/".$fb_src."/feed?access_token=".$access_token."&fields={$fields}&limit={$limit}";
 
   try{
-
-
   $ch = curl_init();
   curl_setopt ($ch, CURLOPT_URL, $json_link);
   curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 5);
@@ -352,9 +347,6 @@ if(isset($_GET['fb_page_feed'])){
   }
 
   echo $json;
-
-
-
   } catch(Facebook\Exceptions\FacebookResponseException $e) {
     echo 'Graph returned an error: ' . $e->getMessage();
     exit;

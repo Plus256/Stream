@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$("#signup_button").click(signUp);
 	$("#signin_button").click(signIn);
 	if(document.getElementById("trend_main")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
-			getFeed("worshipextreme", "mashable", "trend_main", 10);//pass container as argument
+			getFeed("uganda", "mashable.tech", "trend_main", 10);//pass container as argument
 		}
 		if(document.getElementById("user_flyout")){
 			document.getElementById("user_flyout_dp").addEventListener("click", toggleMenu, false);
@@ -151,7 +151,7 @@ function getTwitterFeeds(twt, cont, limit){
 function getFacebookPageFeeds(fb, cont, limit){
 	buffer.render(cont);
 	var xhr;
-	var url="inc/fun.php?fb_page_feed?fb_src="+fb+"&limit="+limit+"";
+	var url="inc/fun.php?fb_page_feed&fb_src="+fb+"&limit="+limit+"";
 	if(window.XMLHttpRequest){
 		xhr=new XMLHttpRequest();
 	}
@@ -161,12 +161,11 @@ function getFacebookPageFeeds(fb, cont, limit){
 	xhr.open("GET", url);
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4 && xhr.status==200){
-			//alert(fb)
 			buffer.done();
 			var data=xhr.responseText;
-			document.getElementById(cont).innerHTML=data;
-			//data=JSON.parse(data);
-				/*for(var c=0; c<(data.data).length; c++){
+			//document.getElementById(cont).innerHTML+=data;
+			data=JSON.parse(data);
+				for(var c=0; c<(data.data).length; c++){
 
 					//alert(c); text, image, user, created_at
 
@@ -252,7 +251,7 @@ function getFacebookPageFeeds(fb, cont, limit){
 					feed.appendChild(feed_spacer);
 
 					$("#"+cont+"").append(feed);
-				}*/
+				}
 				//var items=$(".feed");alert(items.length);
 		}
 	}
@@ -439,7 +438,7 @@ function readStream(id){
 			document.getElementById("user_dash_main_content").innerHTML='';
 			//cpanel_buttons
 			document.getElementById("user_dash_main_cpanel").innerHTML='';
-			getSVGIcon('ic_edit', 'edit_stream_button', editStream(id));//do u realize ur calling the function rightly here? ts nt just an argument of the getSVGIcon fn. try: 'editStream('+id+')'
+			getSVGIcon('ic_edit', 'edit_stream_button', editStream);//do u realize ur calling the function rightly here? ts nt just an argument of the getSVGIcon fn. try: 'editStream('+id+')'
 			getSVGIcon('ic_add', 'new_stream_button', addStream);
 			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
 			var data=xhr.responseText;
