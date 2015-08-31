@@ -445,6 +445,8 @@ function readStream(id){
 			//document.getElementById("user_dash_main_content").innerHTML=data;
 			data=JSON.parse(data);
 
+			var read_fb; var read_twt;
+
 			for(var i in data){
 				var stream_read=_("div");
 				stream_read.setAttribute("class", "stream_read");
@@ -486,6 +488,7 @@ function readStream(id){
 						stream_read_main_fb_icon.innerHTML='<img src="gra/facebook.png" style="width:5em; height:auto;" />';
 						stream_read_main_fb.appendChild(stream_read_main_fb_icon);
 						stream_read_main_fb.innerHTML+="/"+data[i].sources[j].url;
+						read_fb=data[i].sources[j].url;//set variable
 						stream_read_main.appendChild(stream_read_main_fb);
 					}
 					else if(data[i].sources[j].type=="Twitter"){
@@ -496,19 +499,22 @@ function readStream(id){
 						stream_read_main_twt_icon.innerHTML='<img src="gra/twitter.png" style="width:5em; height:auto;" />';
 						stream_read_main_twt.appendChild(stream_read_main_twt_icon);
 						stream_read_main_twt.innerHTML+="#"+data[i].sources[j].url;
+						read_twt=data[i].sources[j].url;//set variable
 						stream_read_main.appendChild(stream_read_main_twt);
 					}
 				}
 				stream_read_main.appendChild(stream_read_main_spacer);
 				/////////////////////////////////////
 				var stream_read_footer=_("div");
-				stream_read_footer.setAttribute("class", "stream_read_footer");
+				stream_read_footer.setAttribute("id", "stream_read_footer");
 				/////////////////////////////////////
 				stream_read.appendChild(stream_read_header);
 				stream_read.appendChild(stream_read_main);
 				stream_read.appendChild(stream_read_footer);
 				stream_read.appendChild(stream_read_spacer);
 				document.getElementById("user_dash_main_content").appendChild(stream_read);
+				//add container first then call function
+				getFeed(read_twt, read_fb, "stream_read_footer", 5);
 			}
 		}
 	}
