@@ -382,10 +382,6 @@ if(isset($_GET['read_stream']) && isset($_GET['id'])){
     $r=mysqli_fetch_assoc($q);
     $id=$r['id']; $name=$r['name']; $status=$r['status']; $created=$r['created'];
     $created=elapsedTime($created);
-    switch($status){
-      case 0: $status="Draft"; break;
-      case 1: $status="Live"; break;
-    }
     $qs=mysqli_query($conn, "select src.id, src.type, src.url from source as src join sourcetostream as sts join stream as s on sts.stream=s.id and sts.source=src.id where s.id=$stream_id");
     if($qs){
       while($rs=mysqli_fetch_assoc($qs)){

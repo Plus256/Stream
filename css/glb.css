@@ -2228,5 +2228,9 @@ table.stream tr:nth-child(even):hover {
 
 a#power_stream_button{
 	margin-bottom:0;
-	background:#EEE;
+	transition:all 1s ease 0.1s;
+	-moz-transition:all 1s ease 0.1s;
+	-webkit-transition:all 1s ease 0.1s;
+	-o-transition:all 1s ease 0.1s;
+	background:rgb(238, 238, 238);
 }

@@ -466,7 +466,6 @@ function readStream(id){
 				var stream_read_header_status=_("div");
 				stream_read_header_status.setAttribute("class", "stream_read_header_status");
 				stream_read_header_status.setAttribute("id", "stream_read_header_status");
-				//stream_read_header_status.innerHTML=data[i].status;
 				stream_read_header.appendChild(stream_read_header_status);
 
 				var stream_read_header_created=_("div");
@@ -519,7 +518,7 @@ function readStream(id){
 			}
 			getSVGIcon('ic_edit', 'edit_stream_button', editStream, "user_dash_main_cpanel");
 			getSVGIcon('ic_add', 'new_stream_button', addStream, "user_dash_main_cpanel");
-			getSVGIcon('ic_power', 'power_stream_button', fetchStream, "stream_read_header_status");
+			getSVGIcon('ic_power', 'power_stream_button', toggleStatus, "stream_read_header_status");
 		}
 	}
 	xhr.send(null);
@@ -814,6 +813,18 @@ function toggleNav(){
 	}
 	else{
 		document.getElementById("mobile_menu_container").style.display="none";
+	}
+}
+
+function toggleStatus(){
+	//getComputedStyle returns rgb, px values, not #EEE or 3em - UNITS
+	//use background-color instead of background - i think  it doesn't recognize compund attributes
+	var bg=window.getComputedStyle(document.getElementById("power_stream_button"), null).getPropertyValue("background-color");
+	if(bg=="rgb(238, 238, 238)"){//draft
+		document.getElementById("power_stream_button").style.background="rgb(91, 188, 46)";
+	}
+	else{//live
+		document.getElementById("power_stream_button").style.background="rgb(238, 238, 238)";
 	}
 }
 
