@@ -287,8 +287,8 @@ function addStream(){
 			//cpanel_buttons
 			//we need to getin the SVG via ajax I guess
 			document.getElementById("user_dash_main_cpanel").innerHTML='';
-			getSVGIcon('ic_save', 'save_stream_button', saveStream);
-			getSVGIcon('ic_cancel', 'cancel_stream_button', fetchStream);
+			getSVGIcon('ic_save', 'save_stream_button', saveStream, "user_dash_main_cpanel");
+			getSVGIcon('ic_cancel', 'cancel_stream_button', fetchStream, "user_dash_main_cpanel");
 		}
 	}
 	xhr.send(null);
@@ -362,7 +362,7 @@ function fetchStream(){
 			document.getElementById("user_dash_main_content").innerHTML='';
 			//cpanel_buttons
 			document.getElementById("user_dash_main_cpanel").innerHTML='';
-			getSVGIcon('ic_add', 'new_stream_button', addStream);
+			getSVGIcon('ic_add', 'new_stream_button', addStream, "user_dash_main_cpanel");
 			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
 			var data=xhr.responseText;
 			//document.getElementById("user_dash_main_content").innerHTML=data;
@@ -465,7 +465,8 @@ function readStream(id){
 
 				var stream_read_header_status=_("div");
 				stream_read_header_status.setAttribute("class", "stream_read_header_status");
-				stream_read_header_status.innerHTML=data[i].status;
+				stream_read_header_status.setAttribute("id", "stream_read_header_status");
+				//stream_read_header_status.innerHTML=data[i].status;
 				stream_read_header.appendChild(stream_read_header_status);
 
 				var stream_read_header_created=_("div");
@@ -516,8 +517,9 @@ function readStream(id){
 				//add container first then call function
 				getFeed(read_twt, read_fb, "stream_read_footer", 5);
 			}
-			getSVGIcon('ic_edit', 'edit_stream_button', editStream);
-			getSVGIcon('ic_add', 'new_stream_button', addStream);
+			getSVGIcon('ic_edit', 'edit_stream_button', editStream, "user_dash_main_cpanel");
+			getSVGIcon('ic_add', 'new_stream_button', addStream, "user_dash_main_cpanel");
+			getSVGIcon('ic_power', 'power_stream_button', fetchStream, "stream_read_header_status");
 		}
 	}
 	xhr.send(null);
@@ -529,8 +531,8 @@ function editStream(){
 	xhr.onreadystatechange=function(){
 	  if (xhr.readyState!=4) return;
 		document.getElementById("user_dash_main_cpanel").innerHTML='';
-		getSVGIcon('ic_save', 'save_stream_button', updateStream);
-		getSVGIcon('ic_cancel', 'cancel_stream_button', returnToStream);
+		getSVGIcon('ic_save', 'save_stream_button', updateStream, "user_dash_main_cpanel");
+		getSVGIcon('ic_cancel', 'cancel_stream_button', returnToStream, "user_dash_main_cpanel");
 		var data=xhr.responseText;
 		document.getElementById("user_dash_main_content").innerHTML=data;
 	};
@@ -630,7 +632,8 @@ function returnToStream(){
 
 				var stream_read_header_status=_("div");
 				stream_read_header_status.setAttribute("class", "stream_read_header_status");
-				stream_read_header_status.innerHTML=data[i].status;
+				stream_read_header_status.setAttribute("id", "stream_read_header_status");
+				//stream_read_header_status.innerHTML=data[i].status;
 				stream_read_header.appendChild(stream_read_header_status);
 
 				var stream_read_header_created=_("div");
@@ -681,8 +684,9 @@ function returnToStream(){
 				//add container first then call function
 				getFeed(read_twt, read_fb, "stream_read_footer", 5);
 			}
-			getSVGIcon('ic_edit', 'edit_stream_button', editStream);
-			getSVGIcon('ic_add', 'new_stream_button', addStream);
+			getSVGIcon('ic_edit', 'edit_stream_button', editStream, "user_dash_main_cpanel");
+			getSVGIcon('ic_add', 'new_stream_button', addStream, "user_dash_main_cpanel");
+			getSVGIcon('ic_power', 'power_stream_button', fetchStream, "stream_read_header_status");
 		}
 	}
 	xhr.send(null);
@@ -813,7 +817,7 @@ function toggleNav(){
 	}
 }
 
-function getSVGIcon(type, id, callback){
+function getSVGIcon(type, id, callback, cont){
 	var svg;
 	var xhr=new XMLHttpRequest;
 	xhr.open('GET','gra/'+type+'.svg',true);
@@ -831,7 +835,7 @@ function getSVGIcon(type, id, callback){
 		//cpanel_but.setAttribute("onclick", ""+callback+"()");
 		cpanel_but.appendChild(svg);
 
-	  document.getElementById("user_dash_main_cpanel").appendChild(cpanel_but);
+	  document.getElementById(cont).appendChild(cpanel_but);
 	};
 	xhr.send();
 }
@@ -839,5 +843,9 @@ function getSVGIcon(type, id, callback){
 function getFeed(twt, fb, cont, limit){
 	getFacebookPageFeeds(fb, cont, limit);
 	getTwitterFeeds(twt, cont, limit);
-	//setInterval(getFeed, 1000);
+}
+
+function pubFeed(twt, fb, cont, limit){
+	getFacebookPageFeeds(fb, cont, limit);
+	getTwitterFeeds(twt, cont, limit);
 }

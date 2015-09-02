@@ -2212,13 +2212,21 @@ table.stream tr:nth-child(even):hover {
 	font-size:150%;
 	color:#766968;
 	float:left;
+	line-height:2em;
 }
 
 .stream_read_header_status{
-	float:right;
+	float:left;
 	margin-left:2em;
+	margin-right:2em;
 }
 
 .stream_read_header_created{
-	float:right;
+	float:left;
+	line-height:3em;
+}
+
+a#power_stream_button{
+	margin-bottom:0;
+	background:#EEE;
 }
