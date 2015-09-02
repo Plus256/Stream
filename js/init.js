@@ -1,5 +1,6 @@
 //be mindful of dual usage of jQuery and pure JavaScript
 var str_id;//VERY KEY
+var str_state;//VERY KEY
 $(document).ready(function(){
 	$(".contact_button").click(contact);
 	$("#signup_button").click(signUp);
@@ -463,6 +464,8 @@ function readStream(id){
 				stream_read_header_name.innerHTML=data[i].name;
 				stream_read_header.appendChild(stream_read_header_name);
 
+				str_state=data[i].status;
+
 				var stream_read_header_status=_("div");
 				stream_read_header_status.setAttribute("class", "stream_read_header_status");
 				stream_read_header_status.setAttribute("id", "stream_read_header_status");
@@ -632,7 +635,6 @@ function returnToStream(){
 				var stream_read_header_status=_("div");
 				stream_read_header_status.setAttribute("class", "stream_read_header_status");
 				stream_read_header_status.setAttribute("id", "stream_read_header_status");
-				//stream_read_header_status.innerHTML=data[i].status;
 				stream_read_header.appendChild(stream_read_header_status);
 
 				var stream_read_header_created=_("div");
@@ -817,14 +819,15 @@ function toggleNav(){
 }
 
 function toggleStatus(){
-	//getComputedStyle returns rgb, px values, not #EEE or 3em - UNITS
-	//use background-color instead of background - i think  it doesn't recognize compund attributes
-	var bg=window.getComputedStyle(document.getElementById("power_stream_button"), null).getPropertyValue("background-color");
-	if(bg=="rgb(238, 238, 238)"){//draft
+	if(str_state==0){//draft
 		document.getElementById("power_stream_button").style.background="rgb(0, 153, 255)";
+		str_state=1;
+		upState(1);//make live
 	}
 	else{//live
 		document.getElementById("power_stream_button").style.background="rgb(238, 238, 238)";
+		str_state=0;
+		upState(0);//make draft
 	}
 }
 
@@ -847,6 +850,14 @@ function getSVGIcon(type, id, callback, cont){
 		cpanel_but.appendChild(svg);
 
 	  document.getElementById(cont).appendChild(cpanel_but);
+		if(document.getElementById("power_stream_button")){//state color
+			if(str_state==0){//draft
+				document.getElementById("power_stream_button").style.background="rgb(238, 238, 238)";
+			}
+			else{//live
+				document.getElementById("power_stream_button").style.background="rgb(0, 153, 255)";
+			}
+		}
 	};
 	xhr.send();
 }
@@ -859,4 +870,43 @@ function getFeed(twt, fb, cont, limit){
 function pubFeed(twt, fb, cont, limit){
 	getFacebookPageFeeds(fb, cont, limit);
 	getTwitterFeeds(twt, cont, limit);
+}
+
+function upState(state){
+	var xhr;
+	var url="inc/edit_stream.php?up_state&id="+str_id+"";
+	var fd="state="+state+"";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("POST", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			var data=xhr.responseText;
+			var fed_b;
+			switch(data){
+				case "0":
+					fed_b="Stream is Unpublished. It is Invisible to your audience.";
+					document.getElementById("user_dash_main_feedback").style.color="#000";
+					document.getElementById("user_dash_main_feedback").innerHTML=fed_b;
+					setTimeout(function (){
+							document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+					}, 3000);
+				break;
+				case "1":
+					fed_b="Stream is Live. It is Visible to your audience.";
+					document.getElementById("user_dash_main_feedback").style.color="#09F";
+					document.getElementById("user_dash_main_feedback").innerHTML=fed_b;
+					setTimeout(function (){
+							document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+					}, 3000);
+				break;
+			}
+		}
+	}
+	xhr.send(fd);
 }

@@ -194,4 +194,21 @@ if(isset($_GET['update_stream']) && isset($_GET['id'])){
 		echo "2";
 	}
 }
+
+if(isset($_GET['up_state']) && isset($_GET['id'])){
+  $stream_id=$_GET['id'];
+  $state=$_POST['state'];
+  $q=mysqli_query($conn, "update stream set status=$state where id=$stream_id");
+  if($q){
+    switch($state){
+      case 0:
+      echo "0";
+      break;
+      case 1:
+      echo "1";
+      break;
+    }
+  }
+}
+
 ?>
