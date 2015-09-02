@@ -1,4 +1,5 @@
 //be mindful of dual usage of jQuery and pure JavaScript
+var str_id;//VERY KEY
 $(document).ready(function(){
 	$(".contact_button").click(contact);
 	$("#signup_button").click(signUp);
@@ -423,6 +424,7 @@ function fetchStream(){
 }
 
 function readStream(id){
+	str_id=id;//value to send with request
 	document.getElementById("user_dash_main_feedback").innerHTML="Sending Request...";
 	var xhr;
 	var url="inc/fun.php?read_stream&id="+id+"";
@@ -438,8 +440,6 @@ function readStream(id){
 			document.getElementById("user_dash_main_content").innerHTML='';
 			//cpanel_buttons
 			document.getElementById("user_dash_main_cpanel").innerHTML='';
-			getSVGIcon('ic_edit', 'edit_stream_button', editStream);//do u realize ur calling the function rightly here? ts nt just an argument of the getSVGIcon fn. try: 'editStream('+id+')'
-			getSVGIcon('ic_add', 'new_stream_button', addStream);
 			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
 			var data=xhr.responseText;
 			//document.getElementById("user_dash_main_content").innerHTML=data;
@@ -516,29 +516,31 @@ function readStream(id){
 				//add container first then call function
 				getFeed(read_twt, read_fb, "stream_read_footer", 5);
 			}
+			getSVGIcon('ic_edit', 'edit_stream_button', editStream);
+			getSVGIcon('ic_add', 'new_stream_button', addStream);
 		}
 	}
 	xhr.send(null);
 }
 
-function editStream(id){
+function editStream(){
 	var xhr=new XMLHttpRequest;
-	xhr.open('GET','inc/edit_stream.php?edit_stream&id='+id+'',true);
+	xhr.open('GET','inc/edit_stream.php?edit_stream&id='+str_id+'',true);
 	xhr.onreadystatechange=function(){
 	  if (xhr.readyState!=4) return;
 		document.getElementById("user_dash_main_cpanel").innerHTML='';
-		getSVGIcon('ic_save', 'save_stream_button', updateStream(id));
-		getSVGIcon('ic_cancel', 'cancel_stream_button', readStream(id));
+		getSVGIcon('ic_save', 'save_stream_button', updateStream);
+		getSVGIcon('ic_cancel', 'cancel_stream_button', returnToStream);
 		var data=xhr.responseText;
 		document.getElementById("user_dash_main_content").innerHTML=data;
 	};
 	xhr.send();
 }
 
-function updateStream(id){
+function updateStream(){
 	document.getElementById("user_dash_main_feedback").innerHTML="Sending...";
 	var xhr;
-	var url="inc/fun.php?update_stream&id="+id+"";
+	var url="inc/edit_stream.php?update_stream&id="+str_id+"";
 	var name=document.getElementById("new_stream_name").value;//we need to learn the jQuery way of getting the value
 	var fb=document.getElementById("new_stream_fb").value;
 	var twt=document.getElementById("new_stream_twt").value;
@@ -585,6 +587,105 @@ function updateStream(id){
 		}
 	}
 	xhr.send(fd);
+}
+
+function returnToStream(){
+	document.getElementById("user_dash_main_feedback").innerHTML="Sending Request...";
+	var xhr;
+	var url="inc/fun.php?read_stream&id="+str_id+"";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("GET", url);
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			document.getElementById("user_dash_main_content").innerHTML='';
+			//cpanel_buttons
+			document.getElementById("user_dash_main_cpanel").innerHTML='';
+			document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
+			var data=xhr.responseText;
+			//document.getElementById("user_dash_main_content").innerHTML=data;
+			data=JSON.parse(data);
+
+			var read_fb; var read_twt;
+
+			for(var i in data){
+				var stream_read=_("div");
+				stream_read.setAttribute("class", "stream_read");
+				var stream_read_spacer=_("div");
+				stream_read_spacer.setAttribute("class", "spacer");
+				////////////////////////////////////
+				var stream_read_header=_("div");
+				stream_read_header.setAttribute("class", "stream_read_header");
+				var stream_read_header_spacer=_("div");
+				stream_read_header_spacer.setAttribute("class", "spacer");
+
+				var stream_read_header_name=_("div");
+				stream_read_header_name.setAttribute("class", "stream_read_header_name");
+				stream_read_header_name.innerHTML=data[i].name;
+				stream_read_header.appendChild(stream_read_header_name);
+
+				var stream_read_header_status=_("div");
+				stream_read_header_status.setAttribute("class", "stream_read_header_status");
+				stream_read_header_status.innerHTML=data[i].status;
+				stream_read_header.appendChild(stream_read_header_status);
+
+				var stream_read_header_created=_("div");
+				stream_read_header_created.setAttribute("class", "stream_read_header_created");
+				stream_read_header_created.innerHTML=data[i].created;
+				stream_read_header.appendChild(stream_read_header_created);
+				stream_read_header.appendChild(stream_read_header_spacer);
+				/////////////////////////////////////
+				var stream_read_main=_("div");
+				stream_read_main.setAttribute("class", "stream_read_main");
+				var stream_read_main_spacer=_("div");
+				stream_read_main_spacer.setAttribute("class", "spacer");
+				//we need to loop through the sources array and determine which source is which, and where it should go
+				for(var j=0; j<(data[i].sources.length); j++){
+					if(data[i].sources[j].type=="Facebook"){
+						var stream_read_main_fb=_("div");
+						stream_read_main_fb.setAttribute("class", "stream_read_main_fb");
+						var stream_read_main_fb_icon=_("div");
+						stream_read_main_fb_icon.setAttribute("class", "stream_read_main_fb_icon");
+						stream_read_main_fb_icon.innerHTML='<img src="gra/facebook.png" style="width:5em; height:auto;" />';
+						stream_read_main_fb.appendChild(stream_read_main_fb_icon);
+						stream_read_main_fb.innerHTML+="/"+data[i].sources[j].url;
+						read_fb=data[i].sources[j].url;//set variable
+						stream_read_main.appendChild(stream_read_main_fb);
+					}
+					else if(data[i].sources[j].type=="Twitter"){
+						var stream_read_main_twt=_("div");
+						stream_read_main_twt.setAttribute("class", "stream_read_main_twt");
+						var stream_read_main_twt_icon=_("div");
+						stream_read_main_twt_icon.setAttribute("class", "stream_read_main_twt_icon");
+						stream_read_main_twt_icon.innerHTML='<img src="gra/twitter.png" style="width:5em; height:auto;" />';
+						stream_read_main_twt.appendChild(stream_read_main_twt_icon);
+						stream_read_main_twt.innerHTML+="#"+data[i].sources[j].url;
+						read_twt=data[i].sources[j].url;//set variable
+						stream_read_main.appendChild(stream_read_main_twt);
+					}
+				}
+				stream_read_main.appendChild(stream_read_main_spacer);
+				/////////////////////////////////////
+				var stream_read_footer=_("div");
+				stream_read_footer.setAttribute("id", "stream_read_footer");
+				/////////////////////////////////////
+				stream_read.appendChild(stream_read_header);
+				stream_read.appendChild(stream_read_main);
+				stream_read.appendChild(stream_read_footer);
+				stream_read.appendChild(stream_read_spacer);
+				document.getElementById("user_dash_main_content").appendChild(stream_read);
+				//add container first then call function
+				getFeed(read_twt, read_fb, "stream_read_footer", 5);
+			}
+			getSVGIcon('ic_edit', 'edit_stream_button', editStream);
+			getSVGIcon('ic_add', 'new_stream_button', addStream);
+		}
+	}
+	xhr.send(null);
 }
 
 function signUp(){
@@ -727,6 +828,7 @@ function getSVGIcon(type, id, callback){
 		cpanel_but.setAttribute("class", "user_dash_main_cpanel_but");
 		cpanel_but.setAttribute("id", ""+id+"");
 		cpanel_but.addEventListener("click", callback, false);
+		//cpanel_but.setAttribute("onclick", ""+callback+"()");
 		cpanel_but.appendChild(svg);
 
 	  document.getElementById("user_dash_main_cpanel").appendChild(cpanel_but);
