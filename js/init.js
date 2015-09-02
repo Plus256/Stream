@@ -5,7 +5,7 @@ $(document).ready(function(){
 	$(".contact_button").click(contact);
 	$("#signup_button").click(signUp);
 	$("#signin_button").click(signIn);
-	if(document.getElementById("trend_main")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
+		if(document.getElementById("trend_main")){//why is $("#feed_container") returning true even when elem is absent? is it because of the HTML5 <section> elem?
 			getFeed("uganda", "mashable.tech", "trend_main", 10);//pass container as argument
 		}
 		if(document.getElementById("user_flyout")){
@@ -867,11 +867,6 @@ function getFeed(twt, fb, cont, limit){
 	getTwitterFeeds(twt, cont, limit);
 }
 
-function pubFeed(twt, fb, cont, limit){
-	getFacebookPageFeeds(fb, cont, limit);
-	getTwitterFeeds(twt, cont, limit);
-}
-
 function upState(state){
 	var xhr;
 	var url="inc/edit_stream.php?up_state&id="+str_id+"";
@@ -904,9 +899,45 @@ function upState(state){
 					setTimeout(function (){
 							document.getElementById("user_dash_main_feedback").innerHTML="&nbsp;";
 					}, 3000);
+					//publish stream... open new tab.
+					window.open("./follow.php?id="+str_id+"");
 				break;
 			}
 		}
 	}
 	xhr.send(fd);
+}
+
+function pubStream(id){
+	var xhr;
+	var url="inc/fun.php?read_stream&id="+id+"";
+	if(window.XMLHttpRequest){
+		xhr=new XMLHttpRequest();
+	}
+	else{
+		xhr=new ActiveXObject("Microsoft:XMLHTTP");
+	}
+	xhr.open("GET", url);
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4 && xhr.status==200){
+			var data=xhr.responseText;
+			data=JSON.parse(data);
+			var read_fb; var read_twt;
+			for(var i in data){
+				var str_name=data[i].name;
+				document.getElementById("follow_header").innerHTML=str_name;
+				var str_state=data[i].status;
+				for(var j=0; j<(data[i].sources.length); j++){
+					if(data[i].sources[j].type=="Facebook"){
+						read_fb=data[i].sources[j].url;
+					}
+					else if(data[i].sources[j].type=="Twitter"){
+						read_twt=data[i].sources[j].url;
+					}
+				}
+				getFeed(read_twt, read_fb, "follow_main", 10);
+			}
+		}
+	}
+	xhr.send(null);
 }
