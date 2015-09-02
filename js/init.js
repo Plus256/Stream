@@ -821,7 +821,7 @@ function toggleStatus(){
 	//use background-color instead of background - i think  it doesn't recognize compund attributes
 	var bg=window.getComputedStyle(document.getElementById("power_stream_button"), null).getPropertyValue("background-color");
 	if(bg=="rgb(238, 238, 238)"){//draft
-		document.getElementById("power_stream_button").style.background="rgb(91, 188, 46)";
+		document.getElementById("power_stream_button").style.background="rgb(0, 153, 255)";
 	}
 	else{//live
 		document.getElementById("power_stream_button").style.background="rgb(238, 238, 238)";
