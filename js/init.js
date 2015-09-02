@@ -685,7 +685,7 @@ function returnToStream(){
 			}
 			getSVGIcon('ic_edit', 'edit_stream_button', editStream, "user_dash_main_cpanel");
 			getSVGIcon('ic_add', 'new_stream_button', addStream, "user_dash_main_cpanel");
-			getSVGIcon('ic_power', 'power_stream_button', fetchStream, "stream_read_header_status");
+			getSVGIcon('ic_power', 'power_stream_button', toggleStatus, "stream_read_header_status");
 		}
 	}
 	xhr.send(null);
