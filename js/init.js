@@ -570,7 +570,7 @@ function updateStream(){
 					}, 2000);
 				break;
 				case "1":
-					fetchStream();
+					returnToStream();
 				break;
 				case "2":
 					fed_b="Specify at least one Source."
