@@ -1,7 +1,7 @@
 <section id="start">
     <div class="wrapper">
       <div id="start_header">
-        Streaming the Future
+        Live Social Feeds
       </div>
       <div id="start_main">
         <!--sign in sign up and some info-->
