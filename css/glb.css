@@ -34,7 +34,6 @@ a:hover {
 	height:5em;
 	position:fixed;
 	width:100%;
-	z-index:2;
 	box-shadow:0 5px 5px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow:0 5px 5px rgba(0, 0, 0, 0.2);
 	-webkit-box-shadow:0 5px 5px rgba(0, 0, 0, 0.2);
@@ -2077,6 +2076,7 @@ a#edit_stream_button{
 	-moz-transition:all 1s ease 0.1s;
 	-webkit-transition:all 1s ease 0.1s;
 	-o-transition:all 1s ease 0.1s;
+	z-index:2;
 }
 
 #user_flyout_menu ul{

@@ -8,6 +8,7 @@
         </div>
     	<div id="fot_links">
             <a href="./#start">Start</a>
+						<a href="./follow.php">Follow</a>
             <a href="./#contact" class="contact_button">Contact</a>
 						<a href="./#about">About</a>
             <div class="spacer"></div>

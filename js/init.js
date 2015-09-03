@@ -1,6 +1,7 @@
 //be mindful of dual usage of jQuery and pure JavaScript
 var str_id;//VERY KEY
 var str_state;//VERY KEY
+var n_a; var n_b;
 $(document).ready(function(){
 	$(".contact_button").click(contact);
 	$("#signup_button").click(signUp);
@@ -936,8 +937,14 @@ function pubStream(id){
 					}
 				}
 				getFeed(read_twt, read_fb, "follow_main", 10);
+				//ADD LINK SHARING OPTION WHEN STREAM IS LIVE
+				//ADD NEW STREAM LISTENER.
 			}
 		}
+		//n_b=document.getElementsByClassName('feed');
+		//alert(n_b.length);
+		//if(n_b.length<(n_a-1)){
+		//}
 	}
 	xhr.send(null);
 }

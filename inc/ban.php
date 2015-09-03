@@ -12,6 +12,7 @@
             <div id="user_flyout_dp"><img src="<?php echo 'img/'.$r['d_src']; ?>" /></div>
             <div id="user_flyout_menu">
                 <ul>
+                  <li><a href="./follow.php">Follow</a></li>
                   <li><a href="#">Profile</a></li>
                   <li><a href="#">Settings</a></li>
                   <li><a href="logout.php">Sign Out</a></li>
@@ -38,6 +39,7 @@
           <nav id="menu">
           	<ul>
                 <li><a href="./#start">START</a></li>
+                <li><a href="./follow.php">FOLLOW</a></li>
                 <li><a href="./#contact" class="contact_button">CONTACT</a></li>
                 <li><a href="./#about">ABOUT</a></li>
               </ul>
@@ -48,6 +50,7 @@
               <div id="mobile_menu_container">
                   <ul>
                     <li><a href="./#start">START</a></li>
+                    <li><a href="./follow.php">FOLLOW</a></li>
                     <li><a href="./#contact" class="contact_button">CONTACT</a></li>
                     <li><a href="./#about">ABOUT</a></li>
                   </ul>
