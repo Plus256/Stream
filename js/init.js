@@ -1,7 +1,7 @@
 //be mindful of dual usage of jQuery and pure JavaScript
 var str_id;//VERY KEY
 var str_state;//VERY KEY
-var n_a; var n_b;
+var twt_max_id;
 $(document).ready(function(){
 	$(".contact_button").click(contact);
 	$("#signup_button").click(signUp);
@@ -52,8 +52,19 @@ function getTwitterFeeds(twt, cont, limit){
 		if(xhr.readyState==4 && xhr.status==200){
 			buffer.done();
 			var data=xhr.responseText;
-			//document.getElementById(cont).innerHTML=data;
-			data=JSON.parse(data);
+			document.getElementById(cont).innerHTML=data;
+			/*data=JSON.parse(data);
+			if(twt_max_id==null){//initialize
+				twt_max_id=data.search_metadata.max_id;
+				//alert("initial: "+twt_max_id);
+			}
+			else{//update
+				var new_twt_max_id=data.search_metadata.max_id;
+				//alert("updated: "+new_twt_max_id);
+				if(new_twt_max_id>twt_max_id){
+					alert("new: "+new_twt_max_id+"old: "+twt_max_id+" loop");
+				}
+			}
 				for(var c=0; c<(data.statuses).length; c++){
 					var feed=_("article");
 					feed.setAttribute("class", "feed");
@@ -144,7 +155,7 @@ function getTwitterFeeds(twt, cont, limit){
 					itemSelector:'.feed',
 					columnWidth:'.feed',
 					isAnimated: true
-				});
+				});*/
 		}
 	}
 	xhr.send(null);
@@ -255,7 +266,6 @@ function getFacebookPageFeeds(fb, cont, limit){
 
 					$("#"+cont+"").append(feed);
 				}
-				//var items=$(".feed");alert(items.length);
 		}
 	}
 	xhr.send(null);
@@ -864,7 +874,7 @@ function getSVGIcon(type, id, callback, cont){
 }
 
 function getFeed(twt, fb, cont, limit){
-	getFacebookPageFeeds(fb, cont, limit);
+	//getFacebookPageFeeds(fb, cont, limit);
 	getTwitterFeeds(twt, cont, limit);
 }
 
@@ -936,15 +946,10 @@ function pubStream(id){
 						read_twt=data[i].sources[j].url;
 					}
 				}
-				getFeed(read_twt, read_fb, "follow_main", 10);
-				//ADD LINK SHARING OPTION WHEN STREAM IS LIVE
-				//ADD NEW STREAM LISTENER.
+				//getFeed(read_twt, read_fb, "follow_main", 10);
+				setInterval(function(){getFeed(read_twt, read_fb, "follow_main", 10);}, 1000);
 			}
 		}
-		//n_b=document.getElementsByClassName('feed');
-		//alert(n_b.length);
-		//if(n_b.length<(n_a-1)){
-		//}
 	}
 	xhr.send(null);
 }
