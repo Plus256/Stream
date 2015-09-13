@@ -52,8 +52,8 @@ function getTwitterFeeds(twt, cont, limit){
 		if(xhr.readyState==4 && xhr.status==200){
 			buffer.done();
 			var data=xhr.responseText;
-			document.getElementById(cont).innerHTML=data;
-			/*data=JSON.parse(data);
+			//document.getElementById(cont).innerHTML=data;
+			data=JSON.parse(data);
 			if(twt_max_id==null){//initialize
 				twt_max_id=data.search_metadata.max_id;
 				//alert("initial: "+twt_max_id);
@@ -155,7 +155,7 @@ function getTwitterFeeds(twt, cont, limit){
 					itemSelector:'.feed',
 					columnWidth:'.feed',
 					isAnimated: true
-				});*/
+				});
 		}
 	}
 	xhr.send(null);
@@ -874,7 +874,7 @@ function getSVGIcon(type, id, callback, cont){
 }
 
 function getFeed(twt, fb, cont, limit){
-	//getFacebookPageFeeds(fb, cont, limit);
+	getFacebookPageFeeds(fb, cont, limit);
 	getTwitterFeeds(twt, cont, limit);
 }
 
@@ -946,8 +946,8 @@ function pubStream(id){
 						read_twt=data[i].sources[j].url;
 					}
 				}
-				//getFeed(read_twt, read_fb, "follow_main", 10);
-				setInterval(function(){getFeed(read_twt, read_fb, "follow_main", 10);}, 1000);
+				getFeed(read_twt, read_fb, "follow_main", 10);
+				//setInterval(function(){getFeed(read_twt, read_fb, "follow_main", 10);}, 1000);
 			}
 		}
 	}
