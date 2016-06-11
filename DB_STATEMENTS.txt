@@ -1,0 +1,53 @@
+status | CREATE TABLE `status` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `json` text NOT NULL,
+  `author` int(10) unsigned NOT NULL,
+  `stream` int(10) unsigned NOT NULL,
+  `src` tinyint(1) unsigned NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `status_ibfk_1` (`author`),
+  KEY `status_ibfk_2` (`stream`),
+  CONSTRAINT `status_ibfk_1` FOREIGN KEY (`author`) REFERENCES `user` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `status_ibfk_2` FOREIGN KEY (`stream`) REFERENCES `stream` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2003078 DEFAULT CHARSET=latin1 |
+
+
+user  | CREATE TABLE `user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `pwd` char(64) NOT NULL,
+  `vkey` char(64) NOT NULL,
+  `uname` varchar(50) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `dp` int(10) unsigned NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `subscr` tinyint(1) NOT NULL DEFAULT '0',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `email` (`email`,`uname`,`name`),
+  KEY `dp` (`dp`),
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`dp`) REFERENCES `dp` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=latin1 |
+
+
+dp    | CREATE TABLE `dp` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `src` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `src` (`src`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 |
+
+
+stream | CREATE TABLE `stream` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `src` varchar(100) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `pid` int(10) unsigned DEFAULT NULL,
+  `user` int(10) unsigned NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `user` (`user`),
+  KEY `src` (`src`),
+  CONSTRAINT `stream_ibfk_1` FOREIGN KEY (`user`) REFERENCES `user` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1 |

@@ -1,0 +1,9 @@
+{
+    "name": "plus256/stream",
+    "description": "A Realtime Feed Streaming App.",
+    "require":{
+        "guzzlehttp/guzzle":"~4",
+        "sendgrid/sendgrid": "~4.0",
+        "fennb/phirehose":"v1.0.1"
+    }
+}

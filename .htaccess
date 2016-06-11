@@ -1,0 +1,10 @@
+Options -Indexes
+
+RewriteEngine On
+
+RewriteRule ^signup$ ./signup.php [NC,L]
+RewriteRule ^engage$ ./signin.php [NC,L]
+RewriteRule ^trending$ ./follow.php [NC,L]
+RewriteRule ^contact$ ./contact.php [NC,L]
+RewriteRule ^logout$ ./logout.php [NC,L]
+ErrorDocument 404 http://stream.ug
